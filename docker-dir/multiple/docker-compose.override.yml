@@ -1,0 +1,5 @@
+web:
+  environment:
+    TESTING: 'true'
+  ports:
+        - "8084:8080"
