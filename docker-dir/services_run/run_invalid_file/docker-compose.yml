@@ -1,0 +1,13 @@
+version: '2'
+services1:
+  web:
+    build:
+      context: ./build-dir
+      dockerfile: Dockerfile
+    ports:
+      - "18082:8080"
+  db:
+    image: opavlova/db-mysql:5.5
+    ports:
+      - "1306:3306"
+#connection url jdbc:mysql://localhost:3306/DOCKERDB

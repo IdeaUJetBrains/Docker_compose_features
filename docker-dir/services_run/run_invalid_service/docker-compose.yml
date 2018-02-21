@@ -1,0 +1,14 @@
+#there is no context: ./build-dir1
+version: '2'
+services:
+  web:
+    build:
+      context: ./build-dir1
+      dockerfile: Dockerfile
+    ports:
+      - "8280:8080"
+  db:
+    image: opavlova/db-mysql:5.5
+    ports:
+      - "3506:3306"
+#connection url jdbc:mysql://localhost:3306/DOCKERDB

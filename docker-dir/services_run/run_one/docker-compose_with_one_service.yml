@@ -1,0 +1,8 @@
+version: '2'
+services:
+  web_100:
+    build:
+      context: ./build-dir
+      dockerfile: Dockerfile
+    ports:
+      - "8380:8080"

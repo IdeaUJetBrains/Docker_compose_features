@@ -1,6 +1,0 @@
-db:
-  environment:
-    TESTING: 'true'
-  ports:
-        - "13306:3306"
-#connection url jdbc:mysql://localhost:13306/DOCKERDB

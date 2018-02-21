@@ -1,0 +1,13 @@
+version: '2'
+services:
+  web_tomcat:
+    build:
+      context: ./build-dir
+      dockerfile: Dockerfile
+    ports:
+      - "9190:8080"
+  db_mysql:
+    image: "opavlova/db-mysql:${TAG_MYSQL_FROM_ENVFILE}"
+    ports:
+      - "4410:3306"
+#connection url jdbc:mysql://localhost:4409/DOCKERDB

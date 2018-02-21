@@ -1,0 +1,16 @@
+version: '2'
+services:
+  web_301:
+    build:
+      context: ./build-dir
+      dockerfile: Dockerfile
+    ports:
+      - "8480:8080"
+  db_302:
+    image: opavlova/db-mysql:5.5
+    ports:
+      - "3806:3306"
+  web_303:
+    image: tomee
+    ports:
+      - "8881:8080"
