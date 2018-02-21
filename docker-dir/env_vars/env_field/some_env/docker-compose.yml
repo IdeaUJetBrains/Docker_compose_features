@@ -1,0 +1,18 @@
+version: '2'
+services:
+  web_tomcat1:
+    image: "opavlova/tomcat:${TEST_ENV_TOMCAT_FROM_FIELD1}"
+#    should be 8-jre7
+    ports:
+      - "9385:8080"
+  web_tomcat2:
+      image: "opavlova/tomcat:${TEST_ENV_TOMCAT_FROM_FIELD2}"
+#      should be 6-jre8
+      ports:
+        - "9386:8080"
+  db_mysql:
+    image: "opavlova/db-mysql:${TAG_MYSQL_FROM_FIELD}"
+#    should be 5.6
+    ports:
+      - "5511:3306"
+#connection url jdbc:mysql://localhost:4409/DOCKERDB
