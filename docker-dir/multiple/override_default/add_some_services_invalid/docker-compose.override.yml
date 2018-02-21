@@ -1,0 +1,13 @@
+version: '2'
+services:
+  web_tomcat:
+    environment:
+      TESTING: 'true'
+    ports:
+          - "1823:8080"
+    web_tomee:
+    image: opavlova/tomee:latest
+  web_tomcat_9-jre8:
+      image: opavlova/tomcat:9-jre8
+  db_mysql:
+    image: opavlova/db-mysql:5.6

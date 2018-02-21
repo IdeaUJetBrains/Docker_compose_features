@@ -1,1 +1,0 @@
-FROM  opavlova/tomcat

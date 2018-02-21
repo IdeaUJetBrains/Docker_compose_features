@@ -5,9 +5,9 @@ services:
       context: ./build-dir
       dockerfile: Dockerfile
     ports:
-      - "18080:8080"
+      - "1820:8080"
   db:
     image: opavlova/db-mysql:5.5
     ports:
-      - "3308:3306"
+      - "3333:3306"
 #connection url jdbc:mysql://localhost:3308/DOCKERDB

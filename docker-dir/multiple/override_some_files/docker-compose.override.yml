@@ -1,7 +1,0 @@
-version: '2'
-services:
-  web:
-    environment:
-      TESTING: 'true'
-    ports:
-          - "8081:8080"

@@ -1,0 +1,4 @@
+version: '2'
+services:
+  web_tomcat4:
+    image: opavlova/tomcat
