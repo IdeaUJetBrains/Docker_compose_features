@@ -6,6 +6,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "9189:8080"
+    environment:
+      - TAG_TOMCAT=6-jre8
   db_mysql:
     image: "opavlova/db-mysql:${TAG_MYSQL_FROM_ENVFILE}"
     ports:
