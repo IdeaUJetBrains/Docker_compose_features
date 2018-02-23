@@ -2,7 +2,7 @@ version: '2'
 services:
   web_tomcat:
     environment:
-      - TAG_TOMCAT1=9-jre8
+       TAG_TOMCAT1: '9-jre8'
     env_file:
       - .env
     build:
