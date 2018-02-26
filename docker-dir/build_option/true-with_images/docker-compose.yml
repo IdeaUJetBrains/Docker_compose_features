@@ -1,0 +1,15 @@
+version: '2'
+services:
+
+  web_tomcat_with_image:
+    build:
+      context: ./build-dir
+      dockerfile: Dockerfile
+
+  db_mysql_with_image:
+    image: "opavlova/db-mysql:${TAG_MYSQL_FROM_ENVFILE}"
+
+  web.tomee_with_image:
+    build:
+       context: ./build-dir
+       dockerfile: Dockerfile1

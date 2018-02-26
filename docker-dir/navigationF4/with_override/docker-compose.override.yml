@@ -1,5 +1,11 @@
 version: '2'
 services:
+  web:
+    build:
+      context: ./build-dir
+      dockerfile: Dockerfile
+    ports:
+      - "8301:8080"
   web_from_override:
     build:
       context: ./build-dir

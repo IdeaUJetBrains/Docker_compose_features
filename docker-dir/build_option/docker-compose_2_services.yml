@@ -1,0 +1,10 @@
+version: "2"
+services:
+  web1:
+    image: tomcat:7.0.82-jre7
+    ports:
+      - 8400:8080
+  web2:
+    image: tomcat:7.0-jre7
+    ports:
+      - 8401:8080

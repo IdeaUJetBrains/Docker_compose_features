@@ -1,0 +1,3 @@
+FROM  opavlova/tomcat
+ENV OP_TEST1=op_test1
+EXPOSE 8091

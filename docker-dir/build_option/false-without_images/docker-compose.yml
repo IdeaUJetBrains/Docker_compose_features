@@ -1,0 +1,18 @@
+version: '2'
+services:
+  web_tomcat_without_image:
+    build:
+      context: ./build-dir
+      dockerfile: Dockerfile
+    ports:
+      - "8500:8080"
+
+  db_mysql_without_image:
+    image: "opavlova/db-mysql:${TAG_MYSQL_FROM_ENVFILE}"
+    ports:
+      - "3500:3306"
+
+  web_tomee_without_image1:
+    build:
+      context: ./build-dir
+      dockerfile: Dockerfile1
