@@ -13,3 +13,4 @@ services:
     build:
        context: ./build-dir
        dockerfile: Dockerfile1
+#images are rebuilt

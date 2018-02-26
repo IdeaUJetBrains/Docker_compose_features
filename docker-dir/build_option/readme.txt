@@ -1,0 +1,1 @@
+With this option images will be rebuilt before the running containers.
