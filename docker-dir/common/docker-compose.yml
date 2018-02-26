@@ -1,0 +1,20 @@
+version: '2'
+services:
+  web_tomee:
+    build:
+      context: ./build-dir
+      dockerfile: Dockerfile
+    ports:
+      - "1800:8080"
+  db_mysql:
+    image: "opavlova/db-mysql:${TAG_MYSQL_FROM_ENVFILE}"
+    ports:
+      - "13306:3306"
+  web_tomcat:
+      image: "opavlova/tomcat:${TAG_TOMCAT_FROM_FIELD}"
+#      should be 9-jre8
+      ports:
+        - "1815:8080"
+  web_tomee1:
+      image: "opavlova/tomee"
+
