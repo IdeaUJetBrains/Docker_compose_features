@@ -1,5 +1,7 @@
-web:
-  environment:
-    TESTING: 'true'
-  ports:
-        - "8084:8080"
+version: '2'
+services:
+  web:
+    environment:
+      TESTING: 'true'
+    ports:
+          - "8084:8080"

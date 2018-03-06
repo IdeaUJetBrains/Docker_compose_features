@@ -1,0 +1,29 @@
+version: '2'
+services:
+
+#invalid container name
+  web_101:
+    build:
+      context: ./build-dir
+      dockerfile: Dockerfile
+#    container_name: ttt_1.2-3_hhhhh!@#$%^&**(()_+
+
+#OK container name
+  db_102:
+    image: opavlova/db-mysql:5.5
+    container_name: ttt_1.2-3_test
+
+#invalid container name
+  web_103:
+    image: tomee
+#    container_name: 123
+
+#OK container name
+  web_104:
+    image: tomee
+    container_name: 1test
+#invalid container name
+  web_105:
+    image: tomee
+#    container_name: test 1
+

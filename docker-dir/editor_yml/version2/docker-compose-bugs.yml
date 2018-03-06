@@ -1,0 +1,21 @@
+version: "2.3"
+services:
+  web:
+      image: busybox:latest
+#Should not be inspection error. The entered value should be OK, it is the example from spec:
+      ulimits:
+        nproc: 65535
+
+
+networks:
+  legacy:
+    ipam:
+#Should not be inspection errors. From the example from spec. IDEA-178495 ( LONG SYNTAX  )?
+      config:
+        - subnet: 172.28.0.0/16
+          ip_range: 172.28.5.0/24
+          gateway: 172.28.5.254
+          aux_addresses:
+            host1: 172.28.1.5
+            host2: 172.28.1.6
+            host3: 172.28.1.7

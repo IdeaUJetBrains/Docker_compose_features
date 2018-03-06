@@ -4,14 +4,14 @@ services:
     image: "opavlova/tomcat:${TEST_ENV_TOMCAT_FROM_FIELD}"
 #    should be 8-jre7
     ports:
-      - "9383:8080"
+      - "19383:8080"
 #    hostname: ${TEST_ENV_TOMCAT_FROM_FIELD}
   web_tomcat2:
       image: "opavlova/tomcat:${TAG_TOMCAT_COMMON}"
       ports:
-        - "9384:8080"
+        - "19384:8080"
   db_mysql:
     image: "opavlova/db-mysql:${TAG_MYSQL_FROM_ENVFILE}"
     ports:
-      - "5510:3306"
+      - "15510:3306"
 

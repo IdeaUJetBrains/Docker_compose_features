@@ -5,12 +5,12 @@ services:
       context: ./build-dir
       dockerfile: Dockerfile
     ports:
-      - "187:8080"
+      - "190:8080"
   db_102:
     image: opavlova/db-mysql:5.5
     ports:
-      - "333:3306"
+      - "334:3306"
   web_103:
     image: tomee
     ports:
-      - "189:8080"
+      - "191:8080"

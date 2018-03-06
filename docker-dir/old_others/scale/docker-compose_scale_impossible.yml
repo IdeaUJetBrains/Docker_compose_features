@@ -1,0 +1,16 @@
+version: '2'
+services:
+
+#impossible to scale with a container name
+  web_200:
+    build:
+      context: ./build-dir
+      dockerfile: Dockerfile
+    container_name: imposssible_to_scale
+
+
+#OK container name
+  db_200:
+    image: opavlova/db-mysql:5.5
+    container_name: ttt_1.2-3_test
+
