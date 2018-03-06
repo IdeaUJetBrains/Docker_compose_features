@@ -1,0 +1,19 @@
+version: '2'
+services:
+  web_101:
+    build:
+      context: ./build-dir
+      dockerfile: Dockerfile
+    container_name: web_101_container
+    ports:
+      - "197:8080"
+  db_102:
+    image: opavlova/db-mysql:5.5
+    container_name: db_102_container
+    ports:
+      - "398:3306"
+  web_103:
+    image: tomee
+    container_name: web_103_container
+    ports:
+      - "199:8080"

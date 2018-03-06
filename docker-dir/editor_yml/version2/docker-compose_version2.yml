@@ -1,0 +1,341 @@
+version: '2'
+services:
+  web_101:
+    build:
+      context: build-dir
+      dockerfile: Dockerfile
+      args:
+        buildno: 1
+        password: secret
+      extra_hosts:
+        - 0.0.0.0
+      labels:
+          com.example.description: "Accounting webapp"
+          com.example.department: "Finance"
+          com.example.label-with-empty-value: ""
+      network: host
+      shm_size: '2gb'
+    cap_add:
+      - ALL
+    command: bundle exec thin -p 3000
+    cgroup_parent: m-executor-abcd
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
+    depends_on:
+      - web_103
+    env_file: build-dir/.env_file
+    dns: 8.8.8.8
+    environment:
+      RACK_ENV: development
+      SHOW: 'true'
+      SESSION_SECRET:
+    expose:
+     - "3000"
+     - "8000"
+    extends:
+      service: web_103
+      file: build-dir/docker-compose.override.yml
+    external_links:
+      - web_103
+    extra_hosts:
+      - 0.0.0.0
+      - "somehost:162.242.195.82"
+    isolation: hyperv
+    sysctls:
+      - net.core.somaxconn=1024
+      - net.ipv4.tcp_syncookies=0
+
+
+
+  web_102:
+    build:
+      context: build-dir
+      dockerfile: Dockerfile
+      target: prod
+      labels:
+        - "com.example.description=Accounting webapp"
+        - "com.example.department=Finance"
+        - "com.example.label-with-empty-value"
+    shm_size: 10000000
+    cap_drop:
+      - CAP_KILL
+      - CAP_IPC_LOCK
+      - CAP_AUDIT_CONTROL
+      - ALL
+#todo Existing bug:  IDEA-181802
+    command: ["bundle", "exec", "thin", "-p", "3000"]
+    dns:
+      - 8.8.8.8
+      - 9.9.9.9
+    dns_opt:
+      - use-vc
+      - no-tld-query
+    dns_search: example.com
+    dns_search:
+      - dc1.example.com
+      - dc2.example.com
+    tmpfs: /run
+    tmpfs:
+      - /run
+      - /tmp
+    entrypoint: /code/entrypoint.sh
+
+  web_104:
+    image: tomcat
+    init: true
+    entrypoint:
+        - php
+        - -d
+        - zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so
+        - -d
+        - memory_limit=-1
+        - vendor/bin/phpunit
+#todo Existing bug: IDEA-181802
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+
+
+  web_103:
+    build:
+      context: build-dir
+      dockerfile: Dockerfile
+    container_name: my-web-container
+    env_file:
+      - build-dir/.env_file
+    group_add:
+      - mail
+
+  db_2:
+      image: redis
+      healthcheck:
+        test: "exit 0"
+        disable: true
+        retries: 111
+
+
+      environment:
+            - RACK_ENV=development
+            - SHOW=true
+            - SESSION_SECRET
+
+  db_3:
+     image: tomcat
+     labels:
+       com.example.description: "Accounting webapp"
+       com.example.department: "Finance"
+       com.example.label-with-empty-value: ""
+     links:
+       - db_4
+     logging:
+       driver: syslog
+       options:
+         syslog-address: "tcp://192.168.0.42:123"
+
+  some-service:
+      networks:
+        new1:
+          - ipv4_address: 0.0.0.0
+          - ipv6_address: 1.1.1.1
+          - link_local_ips:
+              - 1.1.1.1
+          - aliases:
+              - test
+#todo Existing bug: IDEA-186411 (should be from 2.0 applicable)
+          - priority: 101
+  some-service1:
+    networks:
+        new:
+          aliases:
+            - database
+        legacy:
+          aliases:
+            - mysql
+
+
+  web100:
+    image: busybox:latest
+    command: true
+#  Added in version 2.3 file format: Ok
+    runtime: runc
+    stop_signal: SIGUSR1
+# Added in version 2.1 file format: Ok
+    storage_opt:
+      size: '1G'
+    sysctls:
+      net.core.somaxconn: 1024
+      net.ipv4.tcp_syncookies: 0
+
+  web10:
+    image: tomcat
+    ulimits:
+#    todo Ok value should be bug?
+      nproc: 65535
+      nofile:
+        hard: 40000
+        soft: 20000
+    userns_mode: "host"
+
+  web12:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+#  todo  Bug exists: IDEA-178495 ( LONG SYNTAX  )
+    volumes:
+      - type: volume
+        source: mydata
+        target: /data
+        volume:
+           nocopy: true
+       - type: bind
+         source: ./static
+         target: /opt/app/static
+    volume_driver: mysdiver
+#    todo no completion on rw/ro
+    volumes_from:
+      - db_4:rw
+      - web_101:ro
+    restart: no
+    cpu_count: 2
+    cpu_percent: 50
+    cpus: 0.5
+    cpu_shares: 73
+    cpu_quota: 50000
+    cpuset: 0,1
+
+    user: postgresql
+    working_dir: /code
+
+    domainname: foo.com
+    hostname: foo
+    ipc: host
+    mac_address: 02:42:ac:11:65:43
+
+    mem_limit: 1000000000
+    memswap_limit: 2000000000
+    mem_reservation: 512m
+    privileged: true
+
+    oom_score_adj: 500
+    oom_kill_disable: true
+
+    read_only: true
+    shm_size: 64M
+    stdin_open: true
+    tty: true
+
+
+
+
+
+  web11:
+    image: busybox:latest
+    command: echo 'scaled'
+    scale: 3
+
+  db_4:
+     image: tomcat
+     labels:
+       - "com.example.description=Accounting webapp"
+       - "com.example.department=Finance"
+       - "com.example.label-with-empty-value"
+     network_mode: "bridge"
+     network_mode: "host"
+     network_mode: "none"
+     network_mode: "service:[service name]"
+     network_mode: "container:[container name/id]"
+     networks:
+       - some-network
+     pid: "host"
+     pid: "container:custom_container_1"
+     pid: "service:foobar"
+     pids_limit: 10
+     ports:
+      - "3000"
+      - "3000-3005"
+      - "8000:8000"
+      - "9090-9091:8080-8081"
+      - "49100:22"
+      - "127.0.0.1:8001:8001"
+      - "127.0.0.1:5000-5010:5000-5010"
+      - "6060:6060/udp"
+      - "12400-12500:1240"
+     security_opt:
+       - label:user:USER
+       - label:role:ROLE
+     stop_grace_period: 1s
+     stop_grace_period: 1m30s
+     volumes:
+       # Just specify a path and let the Engine create a volume
+       - /var/lib/mysql
+
+       # Specify an absolute path mapping
+       - /opt/data:/var/lib/mysql
+
+       # Path on the host, relative to the Compose file
+       - ./cache:/tmp/cache
+
+       # User-relative path
+       - ~/configs:/etc/configs/:ro
+
+       # Named volume
+       - datavolume:/var/lib/mysql
+
+
+
+
+networks:
+  outside:
+#  OK:  name: Not supported for version 2 docker-compose files. Use network_mode instead.
+      external:
+        name: actual-name-of-network
+  new:
+  legacy:
+    driver: overlay
+    driver_opts:
+      foo: "bar"
+      baz: 1
+    enable_ipv6: true
+    ipam:
+      driver: default
+#      from example
+      config:
+        - subnet: 172.28.0.0/16
+          ip_range: 172.28.5.0/24
+          gateway: 172.28.5.254
+          aux_addresses:
+            host1: 172.28.1.5
+            host2: 172.28.1.6
+            host3: 172.28.1.7
+      options:
+        foo: bar
+        baz: "0"
+    internal: true
+    external: false
+    labels:
+      com.example.description: "Financial transaction network"
+      com.example.department: "Finance"
+      com.example.label-with-empty-value: ""
+
+
+volumes:
+  mydata:
+  data:
+    external: true
+    name: testvalue
+    driver: test
+    driver_opts:
+      foo: "bar"
+      baz: 1
+#    labels:
+#      com.example.description: "Database volume"
+#      com.example.department: "IT/Ops"
+#      com.example.label-with-empty-value: ""
+
+    labels:
+      - "com.example.description=Database volume"
+      - "com.example.department=IT/Ops"
+      - "com.example.label-with-empty-value"
+
+
+
+

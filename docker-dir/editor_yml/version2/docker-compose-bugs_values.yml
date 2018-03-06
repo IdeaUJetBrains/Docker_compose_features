@@ -1,0 +1,34 @@
+version: "2.3"
+services:
+  web:
+      image: busybox:latest
+      command: true
+#Should not be inspection error. Added in version 2.3 file format:
+      runtime: runc
+#Should not be inspection error. Added in version 2.1 file format:
+      storage_opt:
+        size: '1G'
+#Should not be inspection error. The entered value should be OK, it is the example from spec:
+      ulimits:
+        nproc: 65535
+#Should not be inspection error. Added in version 2.2:
+      cpu_count: 2
+      cpu_percent: 50
+      cpus: 0.5
+#Should not be inspection error. Added in version 2.1:
+      oom_kill_disable: true
+#Should not be inspection error. Added in version 2.2 file format:
+      scale: 3
+
+networks:
+  legacy:
+    ipam:
+#Should not be inspection errors. From the example from spec. IDEA-178495 ( LONG SYNTAX  )?
+      config:
+        - subnet: 172.28.0.0/16
+          ip_range: 172.28.5.0/24
+          gateway: 172.28.5.254
+          aux_addresses:
+            host1: 172.28.1.5
+            host2: 172.28.1.6
+            host3: 172.28.1.7
