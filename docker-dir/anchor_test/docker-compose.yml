@@ -1,0 +1,35 @@
+version: '2'
+services:
+  web2:
+    image: opavlova/tomee
+    labels: &anchor
+      K1: "One"
+      K2: "Two"
+
+
+  db2:
+    image: opavlova/db-mysql:5.5
+    labels: *anchor
+
+
+  web3:
+    image: opavlova/tomee
+    labels: &anchor1
+      K1: "One"
+      K2: "Two"
+
+
+  db3:
+    image: opavlova/db-mysql:5.5
+    labels:
+      <<: *anchor1
+      K2: "I Changed"
+      K3: "Three"
+
+  web4:
+    image: opavlova/tomee
+    container_name: &nom alpha
+    labels:
+      app: *nom
+
+
