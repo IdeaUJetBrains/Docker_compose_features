@@ -1,0 +1,7 @@
+version: '2'
+services:
+  web3:
+    build: build-dir/
+    volumes:
+     - ./test:/app3
+     - ~/Downloads:/app33:ro

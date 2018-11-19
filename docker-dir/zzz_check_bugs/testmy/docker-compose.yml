@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  postgres:
+    build: postgres
+    ports:
+      - "25432:5432"
+#    environment:
+#      - POSTGRES_PASSWORD=mypassword

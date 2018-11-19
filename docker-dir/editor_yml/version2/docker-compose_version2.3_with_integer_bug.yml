@@ -1,0 +1,19 @@
+version: '2.3'
+services:
+  web_102:
+    build:
+      context: build-dir
+      dockerfile: Dockerfile
+    shm_size: 10000000m
+
+  web12:
+    image: tomcat
+    mem_limit: 1000000000m
+    memswap_limit: 2000000000m
+    mem_reservation: 512m
+
+    shm_size: 64M
+
+
+
+

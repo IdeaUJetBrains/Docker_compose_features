@@ -1,9 +1,7 @@
 version: '2'
 services:
-  web:
+  web_tomcat_to_override:
     environment:
       TESTING: 'true'
     ports:
-          - "8084:8080"
-    labels:
-      test: test
+    - "8086:8080"

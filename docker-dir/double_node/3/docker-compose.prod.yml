@@ -1,0 +1,15 @@
+version: '2'
+services:
+  web:
+    environment:
+      PRODUCTION: 'true'
+  web_tomee:
+    build:
+      context: ./build-dir
+      dockerfile: Dockerfile2
+    environment:
+      DEBUG: 'true'
+  db:
+    environment:
+      PRODUCTION: 'true'
+  #connection url jdbc:mysql://localhost:13306/DOCKERDB

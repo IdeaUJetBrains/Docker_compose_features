@@ -4,7 +4,7 @@ services:
       image: busybox:latest
 #Should not be inspection error. The entered value should be OK, it is the example from spec:
       ulimits:
-        nproc: 65535
+        nproc: 3423
 
 
 networks:

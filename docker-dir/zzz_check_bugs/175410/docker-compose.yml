@@ -1,0 +1,28 @@
+version: '2'
+services:
+  web:
+    build: .
+    ports:
+     - "8006:8080"
+    volumes:
+     - .:/app
+     - ./test:/app1/
+     - /app2
+     - C:/Users:/app3
+     - ~/Downloads:/app4/:ro
+
+
+
+
+
+
+
+
+
+
+
+#     "Binds" : [
+#     "/host_mnt/c/Users:/app3:rw",
+#     "/host_mnt/c/Users/Olga Pavlova/IdeaProjects/ALL_DOCKER_PROJECTS/Docker_compose_features/docker-dir/zzz_check_bugs/175410/test:/app1:rw",
+#      "/host_mnt/c/Users/Olga Pavlova/IdeaProjects/ALL_DOCKER_PROJECTS/Docker_compose_features/docker-dir/zzz_check_bugs/175410:/app:rw",
+#      "/host_mnt/c/Users/Olga Pavlova/Downloads:/app4:ro" ],

@@ -1,0 +1,166 @@
+{
+  "Args" : [ "run" ],
+  "Config" : {
+    "AttachStderr" : false,
+    "AttachStdin" : false,
+    "AttachStdout" : false,
+    "Cmd" : [ "catalina.sh", "run" ],
+    "Domainname" : "",
+    "Env" : [ "PATH=/usr/local/tomcat/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin", "LANG=C.UTF-8", "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre", "JAVA_VERSION=8u91", "JAVA_DEBIAN_VERSION=8u91-b14-1~bpo8+1", "CA_CERTIFICATES_JAVA_VERSION=20140324", "CATALINA_HOME=/usr/local/tomcat", "TOMCAT_MAJOR=6", "TOMCAT_VERSION=6.0.45", "TOMCAT_TGZ_URL=https://www.apache.org/dist/tomcat/tomcat-6/v6.0.45/bin/apache-tomcat-6.0.45.tar.gz" ],
+    "ExposedPorts" : {
+      "8080/tcp" : { }
+    },
+    "Hostname" : "7e491ce9f211",
+    "Image" : "190331_web",
+    "Labels" : {
+      "com.docker.compose.config-hash" : "6fca54e00169a195e444c8b04c6228bd7787908706928b5cc3fcaa17674c4e17",
+      "com.docker.compose.container-number" : "1",
+      "com.docker.compose.oneoff" : "False",
+      "com.docker.compose.project" : "190331",
+      "com.docker.compose.service" : "web",
+      "com.docker.compose.version" : "1.20.1"
+    },
+    "OpenStdin" : false,
+    "StdinOnce" : false,
+    "Tty" : false,
+    "User" : "",
+    "Volumes" : {
+      "/app1/" : { },
+      "/app4/" : { }
+    },
+    "WorkingDir" : "/usr/local/tomcat"
+  },
+  "Created" : "2018-04-23T11:33:09.8422752Z",
+  "Driver" : "overlay2",
+  "ExecDriver" : null,
+  "HostConfig" : {
+    "Binds" : [ "/host_mnt/c/Users/Olga Pavlova/Downloads:/app4:ro", "/host_mnt/c/Users/Olga Pavlova/IdeaProjects/ALL_DOCKER_PROJECTS/Docker_compose_features/docker-dir/zzz_check_bugs/190331/test:/app1:rw" ],
+    "BlkioWeight" : 0,
+    "ContainerIDFile" : "",
+    "CpuPeriod" : 0,
+    "CpuShares" : 0,
+    "CpuQuota" : 0,
+    "CpusetCpus" : "",
+    "CpusetMems" : "",
+    "LogConfig" : {
+      "Type" : "json-file",
+      "Config" : { }
+    },
+    "Memory" : 0,
+    "MemorySwap" : 0,
+    "MemoryReservation" : 0,
+    "KernelMemory" : 0,
+    "NetworkMode" : "190331_default",
+    "OomKillDisable" : false,
+    "OomScoreAdj" : false,
+    "PortBindings" : {
+      "8080/tcp" : [ {
+        "HostIp" : "",
+        "HostPort" : "8006"
+      } ]
+    },
+    "Privileged" : false,
+    "PublishAllPorts" : false,
+    "ReadonlyRootfs" : false,
+    "RestartPolicy" : {
+      "MaximumRetryCount" : 0,
+      "Name" : ""
+    },
+    "VolumesFrom" : [ ],
+    "PidMode" : "",
+    "CgroupParent" : "",
+    "VolumeDriver" : "",
+    "ShmSize" : 67108864,
+    "PidsLimit" : 0
+  },
+  "HostnamePath" : "/var/lib/docker/containers/7e491ce9f211fc62db34f00fbe3646478398eab5459cf7881b038ac280752ce2/hostname",
+  "HostsPath" : "/var/lib/docker/containers/7e491ce9f211fc62db34f00fbe3646478398eab5459cf7881b038ac280752ce2/hosts",
+  "LogPath" : "/var/lib/docker/containers/7e491ce9f211fc62db34f00fbe3646478398eab5459cf7881b038ac280752ce2/7e491ce9f211fc62db34f00fbe3646478398eab5459cf7881b038ac280752ce2-json.log",
+  "Id" : "7e491ce9f211fc62db34f00fbe3646478398eab5459cf7881b038ac280752ce2",
+  "SizeRootFs" : null,
+  "Image" : "sha256:52b01e983150442f22da46a08d78c4de72ed1e0f7d306adb1ce3d69616fafc07",
+  "MountLabel" : "",
+  "Name" : "/190331_web_1",
+  "RestartCount" : 0,
+  "NetworkSettings" : {
+    "Bridge" : "",
+    "SandboxID" : "4bc4dd54c492503210f916fe5e33c526fe445cc20eabd26dfaa66200b24293be",
+    "HairpinMode" : false,
+    "LinkLocalIPv6Address" : "",
+    "LinkLocalIPv6PrefixLen" : 0,
+    "Ports" : {
+      "8080/tcp" : [ {
+        "HostIp" : "0.0.0.0",
+        "HostPort" : "8006"
+      } ]
+    },
+    "SandboxKey" : "/var/run/docker/netns/4bc4dd54c492",
+    "SecondaryIPAddresses" : null,
+    "SecondaryIPv6Addresses" : null,
+    "EndpointID" : "",
+    "Gateway" : "",
+    "PortMapping" : null,
+    "GlobalIPv6Address" : "",
+    "GlobalIPv6PrefixLen" : 0,
+    "IPAddress" : "",
+    "IPPrefixLen" : 0,
+    "IPv6Gateway" : "",
+    "MacAddress" : "",
+    "Networks" : {
+      "190331_default" : {
+        "IPAMConfig" : null,
+        "Links" : null,
+        "Aliases" : [ "web", "7e491ce9f211" ],
+        "NetworkID" : "278556d5c43ac25b1a213a0e710fbc4b8bbd1aa1389b9752be50009fcae323ea",
+        "EndpointID" : "11b77fa24e98d7d468b35a00cf6bf647cc56c614413464e77c52dfcd527c8a33",
+        "Gateway" : "172.27.0.1",
+        "IPAddress" : "172.27.0.2",
+        "IPPrefixLen" : 16,
+        "IPv6Gateway" : "",
+        "GlobalIPv6Address" : "",
+        "GlobalIPv6PrefixLen" : 0,
+        "MacAddress" : "02:42:ac:1b:00:02"
+      }
+    }
+  },
+  "Path" : "catalina.sh",
+  "ProcessLabel" : "",
+  "ResolvConfPath" : "/var/lib/docker/containers/7e491ce9f211fc62db34f00fbe3646478398eab5459cf7881b038ac280752ce2/resolv.conf",
+  "ExecIDs" : null,
+  "State" : {
+    "oomkilled" : false,
+    "Status" : "running",
+    "Running" : true,
+    "Paused" : false,
+    "Restarting" : false,
+    "OOMKilled" : false,
+    "Dead" : false,
+    "Pid" : 79595,
+    "ExitCode" : 0,
+    "Error" : "",
+    "StartedAt" : "2018-04-23T11:33:10.995281Z",
+    "FinishedAt" : "0001-01-01T00:00:00Z",
+    "Health" : null
+  },
+  "Volumes" : null,
+  "VolumesRW" : null,
+  "Mounts" : [ {
+    "Name" : null,
+    "Source" : "/host_mnt/c/Users/Olga Pavlova/Downloads",
+    "Destination" : {
+      "path" : "/app4"
+    },
+    "Driver" : null,
+    "Mode" : "ro",
+    "RW" : false
+  }, {
+    "Name" : null,
+    "Source" : "/host_mnt/c/Users/Olga Pavlova/IdeaProjects/ALL_DOCKER_PROJECTS/Docker_compose_features/docker-dir/zzz_check_bugs/190331/test",
+    "Destination" : {
+      "path" : "/app1"
+    },
+    "Driver" : null,
+    "Mode" : "rw",
+    "RW" : true
+  } ]
+}

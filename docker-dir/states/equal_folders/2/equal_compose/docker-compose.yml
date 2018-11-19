@@ -1,0 +1,13 @@
+version: '2'
+services:
+  web_tomcat_simple2:
+    image: opavlova/tomee
+    ports:
+      - "8103:8080"
+  db_mysql_simple:
+    image: opavlova/db-mysql:5.5
+    ports:
+      - "3001:3306"
+#connection url jdbc:mysql://localhost:3336/DOCKERDB
+  web_tomcat_one_more:
+    image: opavlova/tomcat

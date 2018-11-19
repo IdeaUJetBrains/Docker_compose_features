@@ -1,0 +1,6 @@
+version: '2'
+services:
+  db_mysql:
+    image: opavlova/db-mysql:5.5
+    ports:
+      - "3341:3306"

@@ -1,0 +1,21 @@
+version: '2'
+services:
+  web:
+    environment:
+      TESTING: 'true'
+    ports:
+          - "8084:8080"
+  web_tomee1:
+    build:
+      context: ./build-dir
+      dockerfile: Dockerfile1
+    environment:
+      DEBUG: 'true'
+    ports:
+      - "28080:8080"
+  web_tomee2:
+      build:
+        context: ./build-dir
+        dockerfile: Dockerfile2
+      environment:
+        DEBUG: 'false'

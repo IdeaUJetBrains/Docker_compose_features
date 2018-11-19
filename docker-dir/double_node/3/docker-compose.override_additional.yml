@@ -1,0 +1,10 @@
+version: '2'
+services:
+  web:
+    environment:
+      TESTING: 'false'
+    ports:
+          - "8087:8080"
+  web_tomee1:
+    environment:
+      DEBUG: 'false'

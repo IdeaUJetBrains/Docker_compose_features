@@ -1,0 +1,48 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=saleor
+      - POSTGRES_PASSWORD=saleor
+    ports:
+      - '127.0.0.1:5432:5432'
+  redis:
+    image: redis
+    ports:
+      - '127.0.0.1:6379:6379'
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: common.env
+    command: celery -A saleor worker --app=saleor.celeryconf:app --loglevel=info
+    volumes:
+      - .:/app:Z
+    links:
+      - redis
+    depends_on:
+      - redis
+  search:
+    image: elasticsearch:5.4.3
+    mem_limit: 512kb   # <- there problem  Unit can be one of b, k, m, or g (b, k, m, g, kb, mb, gb)
+    mem_reservation: 512k
+    memswap_limit: 512mb
+    shm_size: 512gb
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - '127.0.0.1:9200:9200'
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: common.env
+    depends_on:
+      - db
+      - redis
+      - search
+    ports:
+      - '8000:8000'
+    volumes:
+      - .:/app:Z

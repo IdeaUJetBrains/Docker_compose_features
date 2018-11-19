@@ -1,0 +1,4 @@
+version: '2'
+services:
+  db:
+    image: opavlova/db-mysql:5.5

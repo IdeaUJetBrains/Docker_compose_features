@@ -1,0 +1,6 @@
+version: '2'
+services:
+  web2:
+    image: opavlova/tomee
+  db2:
+    image: opavlova/db-mysql:5.5
