@@ -1,0 +1,72 @@
+#Files tab OK WORKS  only for
+#- mongo
+# for others - doesn't work
+
+
+      #initial OS image:  FROM ubuntu:14.04.2
+FROM datagrip/oracle:11.2
+
+      #initial OS image:  FROM centos
+#FROM datagrip/greenplum
+
+      #initial OS image:  FROM ubuntu:18.04
+#FROM datagrip/clickhouse
+
+      #initial OS image:  FROM debian:stretch-slim
+#FROM datagrip/cassandra:3.11
+
+      #initial OS image:  FROM ifnazar/sybase_15_7    - CentOS-7
+#FROM datagrip/sybase
+
+      #initial OS image:  FROM ubuntu:16.04
+#FROM datagrip/mssql-server-linux
+
+
+      #initial OS image:  FROM stackbrew/ubuntu:12.04
+#FROM datagrip/postgres:9.3
+
+       #initial OS image:  FROM ubuntu:14.04
+#FROM datagrip/pgbouncer
+
+      #initial OS image:  FROM memsql/quickstart:minimal-6.0.14     -  Debian GNU/Linux, #VERSION="8 (jessie)"
+#FROM datagrip/memsql
+
+      #initial OS image:  FROM blacklabelops/java:openjre7   - Alpine Linux v3.3.3
+#FROM datagrip/h2
+
+      #initial OS image:  FROM java:8-alpine  cassandra    - Alpine Linux v3.4.6
+#FROM datagrip/hsqldb
+
+       #initial OS image:  FROM centos:6   - CentOS release 6.9 (Final)
+#FROM datagrip/exasol
+
+      #initial OS image:   -  Debian GNU/Linux, #VERSION="8 (jessie)"
+#FROM datagrip/hive:2.3.2-postgresql-metastore
+
+    #initial OS image:    - "Debian GNU/Linux" VERSION="7 (wheezy)
+#FROM datagrip/mysql:5.1
+#ENTRYPOINT ["tail", "-f", "/dev/null"]
+
+    #initial OS image:  FROM jbfavre/vertica:7.2    Ubuntu LTS 16.04 , Debian 8.0 Jessie, CentOS 7
+#FROM  datagrip/vertica:9.1.1
+
+
+    #initial OS image:  FROM postgres:9.6       debian:stretch-slim,  alpine:3.9
+#FROM datagrip/postgis
+
+     #initial OS image:  FROM blacklabelops/java:openjre7     - Alpine Linux v3.3.3
+#FROM datagrip/derby-server
+
+
+     #initial OS image:  FROM ibmcom/db2express-c:10.5.0.5-3.10.0   - CentOS Linux 7
+#FROM datagrip/db2
+#ENTRYPOINT ["tail", "-f", "/dev/null"]
+
+     #initial OS image:  FROM debian:jessie
+#FROM opavlova/db-mysql:5.5
+
+     #initial OS image:  FROM debian:stretch-slim
+#FROM couchdb
+
+#Files tab OK WORKS   - initial OS image:  FROM ubuntu:16.4.6    - Files tab OK WORKS
+#FROM mongo

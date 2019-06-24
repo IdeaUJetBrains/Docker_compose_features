@@ -1,0 +1,29 @@
+#Files tab OK WORKS  only for
+#- mongo
+# for others - doesn't work
+version: "2"
+services:
+  oracle_db:
+    image: datagrip/oracle:11.2
+    #initial OS image:  FROM ubuntu:14.04.2
+    #    NOT OK
+  greenplum_db:
+    image: datagrip/greenplum
+    #initial OS image:  FROM centos
+
+  clickhouse_db:
+    image: datagrip/clickhouse
+    #initial OS image:  FROM ubuntu:18.04
+  cassandra_db:
+    image: datagrip/cassandra:3.11
+    #initial OS image:  FROM debian:stretch-slim
+  sybase_db:
+    image: datagrip/sybase
+    #initial OS image:  FROM ifnazar/sybase_15_7 - CentOS-7
+  mssql-server-linux_db:
+    image: datagrip/mssql-server-linux
+    #initial OS image:  FROM ubuntu:16.04
+  postgres_db:
+    image: datagrip/postgres:9.3
+    entrypoint:  ["tail", "-f", "/dev/null"]
+    #initial OS image:  FROM stackbrew/ubuntu:12.04

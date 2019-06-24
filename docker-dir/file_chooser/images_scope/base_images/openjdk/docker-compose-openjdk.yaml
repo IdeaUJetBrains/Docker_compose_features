@@ -1,0 +1,32 @@
+# for openjdk 8-11 - all is ok, for others - NOT ok
+version: "2"
+services:
+  service_openjdk:
+    image: openjdk
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_openjdk6:
+    image: openjdk:6
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_openjdk7:
+    image: openjdk:7
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_openjdk8:
+    image: openjdk:8
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_openjdk9:
+    image: openjdk:9
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_openjdk10:
+    image: openjdk:10
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_openjdk11:
+    image: openjdk:11
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_openjdk12:
+    image: openjdk:12
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_openjdk13:
+    image: openjdk:13
+    entrypoint:  ["tail", "-f", "/dev/null"]
+
+

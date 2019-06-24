@@ -1,0 +1,22 @@
+# "Files" don't work for
+#  - ubuntu-14.04,
+#  for others works Ok.
+
+
+version: "2"
+services:
+  ubuntu_18.04:
+    image: ubuntu:18.04
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  ubuntu-18.10:
+    image: ubuntu:18.10
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  ubuntu-19.04:
+    image: ubuntu:19.04
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  ubuntu-14.04:
+    image: ubuntu:14.04
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  ubuntu-16.04:
+    image: ubuntu:16.04
+    entrypoint:  ["tail", "-f", "/dev/null"]

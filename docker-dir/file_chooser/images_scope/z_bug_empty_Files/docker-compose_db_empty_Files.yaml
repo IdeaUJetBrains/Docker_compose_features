@@ -1,0 +1,14 @@
+version: "2"
+services:
+  postgres_db:
+    image:  postgres:9.5-alpine
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  derby-server_db:
+    image: datagrip/derby-server
+    #initial OS image:  FROM blacklabelops/java:openjre7  - Alpine Linux v3.3.3
+  h2_db:
+    image: datagrip/h2
+    #initial OS image:  FROM blacklabelops/java:openjre7  - Alpine Linux v3.3.3
+  hsqldb_db:
+    image: datagrip/hsqldb
+    #initial OS image:  FROM java:8-alpine - Alpine Linux v3.4.6

@@ -1,0 +1,18 @@
+# "Files"  work for
+# - photon:1.0
+# don't work for others
+
+version: "2"
+services:
+  photon_1.0:
+    image: photon:1.0
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  photon_2.0:
+    image: photon:2.0
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  photon_3.0:
+    image: photon:3.0
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  photon_dev:
+    image: photon:dev
+    entrypoint:  ["tail", "-f", "/dev/null"]

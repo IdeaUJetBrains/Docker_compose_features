@@ -1,0 +1,16 @@
+# "Files" don't work for all of them
+
+version: "2"
+services:
+  oraclelinux_6:
+    image: oraclelinux:6
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  oraclelinux_6-slim:
+    image: oraclelinux:6-slim
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  oraclelinux_7:
+    image: oraclelinux:7
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  oraclelinux_7-slim:
+    image: oraclelinux:7-slim
+    entrypoint:  ["tail", "-f", "/dev/null"]

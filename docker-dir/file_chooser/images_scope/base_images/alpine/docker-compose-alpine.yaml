@@ -1,0 +1,19 @@
+# "Files" don't work for all of them
+
+version: "2"
+services:
+  alpine_edge:
+    image: alpine:edge
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  alpine_3.9:
+    image: alpine:3.9
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  alpine_3.8:
+    image: alpine:3.8
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  alpine_3.7:
+    image: alpine:3.7
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  alpine_3.6:
+    image: alpine:3.6
+    entrypoint:  ["tail", "-f", "/dev/null"]

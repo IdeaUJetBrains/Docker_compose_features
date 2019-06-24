@@ -1,0 +1,107 @@
+# Files tab OK WORKS  for
+# - jetty
+# - tomcat
+# - tomee
+# - websphere
+# Files tab doesn't work for:
+# - geronimo   - Debian GNU/Linux 7 (wheezy)
+# - glassfish  - Debian GNU/Linux 8 (jessie)
+# - resin      - centos:7
+# - weblogic   - Oracle Linux Server 7.2
+# - wildfly    - - centos:7
+version: "2"
+services:
+  geronimo_ws:
+    image:  jaydm/geronimo:2.2.1
+    #initial OS image:
+
+  jetty_ws:
+     image: jetty
+#     image: jetty:9.3.8
+#      image: jetty:9.3
+#      image:: jetty:9
+#      image: jetty:9.3.8-jre8
+#      image: jetty:9.3-jre8
+#      image: jetty:9-jre8
+#      image: jetty:jre8
+#      image: jetty:9.2.15
+#      image: jetty:9.2
+#      image: jetty:9.2.15-jre8
+#      image: jetty:9.2-jre8
+#      image: jetty:9.2.15-jre7
+#      image: jetty:9.2-jre7
+#      image: jetty:9-jre7
+#      image: jetty:jre7
+     #initial OS image:
+
+  glassfish_ws:
+     image: glassfish
+#     image: glassfish:4.0-jdk7
+#     image: glassfish:4.1-jdk8
+     #initial OS image:
+
+  expertsystems_resin_ws:
+     image: expertsystems/resin
+     #initial OS image:
+
+  tomcat_ws:
+     image: tomcat
+     #initial OS image:
+
+  tomee_ws:
+     image: tomee
+    #image: tomee:6-jre-1.7.4-jaxrs
+    #image: tomee:6-jre-1.7.4-plume
+    #image: tomee:6-jre-1.7.4-plus
+    #image: tomee:6-jre-1.7.4-webprofile
+    #image: tomee:7-jre-1.7.4-jaxrs
+    #image: tomee:7-jre-1.7.4-plume
+    #image: tomee:7-jre-1.7.4-plus
+    #image: tomee:7-jre-1.7.4-webprofile
+    #image: tomee:8-jre-1.7.4-jaxrs
+    #image: tomee:8-jre-1.7.4-plume
+    #image: tomee:8-jre-1.7.4-plus
+    #image: tomee:8-jre-1.7.4-webprofile
+    #image: tomee:7-jdk-7.0.0-plume
+    #image: tomee:7-jdk-7.0.0-plus
+    #image: tomee:7-jdk-7.0.0-webprofile
+    #image: tomee:8-jdk-7.0.0-plume
+    #image: tomee:8-jdk-7.0.0-plus
+    #image: tomee:8-jdk-7.0.0-webprofile
+     #initial OS image:
+
+  weblogic_ws:
+     image: opavlova/weblogic:12.1.3
+#     image: weblogic:12.2.1
+     #initial OS image:
+
+  wildfly_ws:
+     image: jboss/wildfly
+    #image: jboss/wildfly:8.1.0.Final
+    #image: jboss/wildfly:8.2.0.Final
+    #image: jboss/wildfly:8.2.1.Final
+    #image: jboss/wildfly:9.0.0.Final
+    #image: jboss/wildfly:9.0.1.Final
+    #image: jboss/wildfly:9.0.2.Final
+    #image: jboss/wildfly:10.0.0.Final
+     #initial OS image:
+
+  websphere-liberty_ws:
+     image: websphere-liberty
+    #image: websphere-liberty:kernel
+    #image: websphere-liberty:8.5.5.9-kernel
+    #image: websphere-liberty:common
+    #image: websphere-liberty:8.5.5.9-common
+    #image: websphere-liberty:webProfile6
+    #image: websphere-liberty:8.5.5.9-webProfile6
+    #image: websphere-liberty:webProfile7
+    #image: websphere-liberty:8.5.5.9-webProfile7
+    #image: websphere-liberty:javaee7
+    #image: websphere-liberty:8.5.5.9-javaee7
+    #image: websphere-liberty:8.5.5.9
+    #image: websphere-liberty:8.5.5
+    #image: websphere-liberty:beta
+     #initial OS image:
+
+
+

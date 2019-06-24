@@ -1,0 +1,5 @@
+version: "2"
+services:
+  service1:
+    image: ifnazar/sybase_15_7
+    entrypoint:  ["tail", "-f", "/dev/null"]

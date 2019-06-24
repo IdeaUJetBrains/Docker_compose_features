@@ -1,0 +1,50 @@
+#Files tab OK WORKS  only for
+#- mongo
+# for others - doesn't work
+version: "2"
+services:
+  pgbouncer_db:
+    image: datagrip/pgbouncer
+    #initial OS image:  FROM ubuntu:14.04
+  memsql_db:
+    image: datagrip/memsql
+    #initial OS image:  FROM memsql/quickstart:minimal-6.0.14    -  Debian GNU/Linux, #VERSION="8 (jessie)"
+  h2_db:
+    image: datagrip/h2
+    #initial OS image:  FROM blacklabelops/java:openjre7  - Alpine Linux v3.3.3
+  hsqldb_db:
+    image: datagrip/hsqldb
+    #initial OS image:  FROM java:8-alpine - Alpine Linux v3.4.6
+  exasol_db:
+    image: datagrip/exasol
+    #initial OS image:  FROM centos:6   - CentOS release 6.9 (Final)
+  hive_db:
+    image: datagrip/hive:2.3.2-postgresql-metastore
+    #initial OS image:  - -  Debian GNU/Linux, #VERSION="8 (jessie)"
+  mysql_db:
+    image: datagrip/mysql:5.1
+    entrypoint:  ["tail", "-f", "/dev/null"]
+    #initial OS image:  FROM debian:wheezy "Debian GNU/Linux" VERSION="7 (wheezy)
+
+  vertica_db:
+    image: datagrip/vertica:9.1.1
+    #initial OS image:  FROM jbfavre/vertica:7.2   Ubuntu LTS 16.04 , Debian 8.0 Jessie, CentOS 7
+  postgis_db:
+    image: datagrip/postgis
+    #initial OS image:  FROM postgres:9.6  debian:stretch-slim,  alpine:3.9
+  derby-server_db:
+    image: datagrip/derby-server
+    #initial OS image:  FROM blacklabelops/java:openjre7  - Alpine Linux v3.3.3
+  db2_db:
+    image: datagrip/db2
+    entrypoint:  ["tail", "-f", "/dev/null"]
+    #initial OS image:  FROM ibmcom/db2express-c:10.5.0.5-3.10.0  - CentOS Linux 7
+  opavlova_db-mysql_db:
+    image: opavlova/db-mysql:5.5
+    #initial OS image:  FROM debian:jessie
+  couchdb_db:
+    image: couchdb
+    #initial OS image:  FROM debian:stretch-slim
+  mongo_db:
+    image: mongo
+    #initial OS image:  FROM ubuntu:16.4.6    - Files tab OK WORKS

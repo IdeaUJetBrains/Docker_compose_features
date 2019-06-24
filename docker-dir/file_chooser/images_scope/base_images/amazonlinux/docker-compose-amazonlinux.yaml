@@ -1,0 +1,10 @@
+# "Files" don't work for all of them
+
+version: "2"
+services:
+  amazonlinux_1:
+    image: amazonlinux:1
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  amazonlinux_2:
+    image: amazonlinux:2
+    entrypoint:  ["tail", "-f", "/dev/null"]

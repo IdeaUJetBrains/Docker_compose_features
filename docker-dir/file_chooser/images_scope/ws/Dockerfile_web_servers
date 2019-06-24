@@ -1,0 +1,83 @@
+FROM jaydm/geronimo:2.2.1
+
+#FROM glassfish
+#FROM glassfish:4.0-jdk7
+#FROM glassfish:4.1-jdk8
+
+#FROM jetty
+#FROM jetty:9.3.8
+#FROM jetty:9.3
+#FROM jetty:9
+#FROM jetty:9.3.8-jre8
+#FROM jetty:9.3-jre8
+#FROM jetty:9-jre8
+#FROM jetty:jre8
+#FROM jetty:9.2.15
+#FROM jetty:9.2
+#FROM jetty:9.2.15-jre8
+#FROM jetty:9.2-jre8
+#FROM jetty:9.2.15-jre7
+#FROM jetty:9.2-jre7
+#FROM jetty:9-jre7
+#FROM jetty:jre7
+
+
+#FROM expertsystems/resin
+
+
+#FROM tomcat
+#FROM tomee
+#FROM tomee:6-jre-1.7.4-jaxrs
+#FROM tomee:6-jre-1.7.4-plume
+#FROM tomee:6-jre-1.7.4-plus
+#FROM tomee:6-jre-1.7.4-webprofile
+#FROM tomee:7-jre-1.7.4-jaxrs
+#FROM tomee:7-jre-1.7.4-plume
+#FROM tomee:7-jre-1.7.4-plus
+#FROM tomee:7-jre-1.7.4-webprofile
+#FROM tomee:8-jre-1.7.4-jaxrs
+#FROM tomee:8-jre-1.7.4-plume
+#FROM tomee:8-jre-1.7.4-plus
+#FROM tomee:8-jre-1.7.4-webprofile
+#FROM tomee:7-jdk-7.0.0-plume
+#FROM tomee:7-jdk-7.0.0-plus
+#FROM tomee:7-jdk-7.0.0-webprofile
+#FROM tomee:8-jdk-7.0.0-plume
+#FROM tomee:8-jdk-7.0.0-plus
+#FROM tomee:8-jdk-7.0.0-webprofile
+
+
+#FROM opavlova/weblogic:12.1.3
+#FROM opavlova/weblogic:12.2.1
+
+
+#FROM websphere-liberty
+#FROM websphere-liberty:kernel
+#FROM websphere-liberty:8.5.5.9-kernel
+#FROM websphere-liberty:common
+#FROM websphere-liberty:8.5.5.9-common
+#FROM websphere-liberty:webProfile6
+#FROM websphere-liberty:8.5.5.9-webProfile6
+#FROM websphere-liberty:webProfile7
+#FROM websphere-liberty:8.5.5.9-webProfile7
+#FROM websphere-liberty:javaee7
+#FROM websphere-liberty:8.5.5.9-javaee7
+#FROM websphere-liberty:8.5.5.9
+#FROM websphere-liberty:8.5.5
+#FROM websphere-liberty:beta
+
+
+#FROM jboss/wildfly
+#FROM jboss/wildfly:8.1.0.Final
+#FROM jboss/wildfly:8.2.0.Final
+#FROM jboss/wildfly:8.2.1.Final
+#FROM jboss/wildfly:9.0.0.Final
+#FROM jboss/wildfly:9.0.1.Final
+#FROM jboss/wildfly:9.0.2.Final
+#FROM jboss/wildfly:10.0.0.Final
+
+#FROM java:7-jre
+#ENTRYPOINT  ["tail", "-f", "/dev/null"]
+
+#FROM java:8-jre
+#ENTRYPOINT  ["tail", "-f", "/dev/null"]

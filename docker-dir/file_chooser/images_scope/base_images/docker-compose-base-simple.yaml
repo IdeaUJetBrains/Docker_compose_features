@@ -1,0 +1,119 @@
+version: "2"
+services:
+  service_busybox:
+    image: busybox
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_node:
+    image: node
+    entrypoint:  ["tail", "-f", "/dev/null"]
+#    FROM ubuntu:bionic
+  service_ghost:
+    image: ghost
+    entrypoint:  ["tail", "-f", "/dev/null"]
+
+  alpine_3.6:
+    image: alpine:3.6
+    entrypoint:  ["tail", "-f", "/dev/null"]
+
+  photon_3.0:
+    image: photon:3.0
+    entrypoint:  ["tail", "-f", "/dev/null"]
+
+  centos_6.6:
+    image: centos:6.6
+    entrypoint:  ["tail", "-f", "/dev/null"]
+
+  amazonlinux_1:
+    image: amazonlinux:1
+    entrypoint:  ["tail", "-f", "/dev/null"]
+
+  debian_jessie:
+    image: debian:jessie
+    entrypoint:  ["tail", "-f", "/dev/null"]
+
+  fedora_31:
+    image: fedora:31
+    entrypoint:  ["tail", "-f", "/dev/null"]
+
+  service_java:
+    image: java
+  service_java6:
+    image: java:6
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_java7:
+    image: java:7
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_java8:
+    image: java:8
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_java9:
+    image: java:9
+    entrypoint:  ["tail", "-f", "/dev/null"]
+
+  service_openjdk:
+    image: openjdk
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_openjdk6:
+    image: openjdk:6
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_openjdk7:
+    image: openjdk:7
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_openjdk8:
+    image: openjdk:8
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_openjdk9:
+    image: openjdk:9
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_openjdk10:
+    image: openjdk:10
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_openjdk11:
+    image: openjdk:11
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_openjdk12:
+    image: openjdk:12
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_openjdk13:
+    image: openjdk:13
+    entrypoint:  ["tail", "-f", "/dev/null"]
+
+  oraclelinux_6:
+    image: oraclelinux:6
+    entrypoint:  ["tail", "-f", "/dev/null"]
+#other_linux
+  service_sourcemage:
+    image: sourcemage
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_sl:
+    image: sl
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_alt:
+    image: alt
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_clearlinux:
+    image: clearlinux
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_crux:
+    image: crux
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_opensuse:
+    image: opensuse
+    entrypoint:  ["tail", "-f", "/dev/null"]
+
+
+  ubuntu_18.04:
+    image: ubuntu:18.04
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  ubuntu-18.10:
+    image: ubuntu:18.10
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  ubuntu-19.04:
+    image: ubuntu:19.04
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  ubuntu-14.04:
+    image: ubuntu:14.04
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  ubuntu-16.04:
+    image: ubuntu:16.04
+    entrypoint:  ["tail", "-f", "/dev/null"]

@@ -1,0 +1,7 @@
+version: "2"
+services:
+  service_busybox:
+    image: busybox
+    entrypoint:  ["tail", "-f", "/dev/null"]
+#    OS = 4.9.125-linuxkit
+#command shell: ash   (not bash)

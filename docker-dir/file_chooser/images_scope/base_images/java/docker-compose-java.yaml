@@ -1,0 +1,25 @@
+#Only one "Files" tab is ok
+#- for java9
+
+version: "2"
+services:
+  service_java6:
+    image: java:6
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_java7:
+    image: java:7
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_java8:
+    image: java:8
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  service_java9:
+    image: java:9
+    entrypoint:  ["tail", "-f", "/dev/null"]
+
+  jre7_ws:
+    image: java:7-jre
+    entrypoint:  ["tail", "-f", "/dev/null"]
+
+  jre8_ws:
+    image: java:8-jre
+    entrypoint:  ["tail", "-f", "/dev/null"]

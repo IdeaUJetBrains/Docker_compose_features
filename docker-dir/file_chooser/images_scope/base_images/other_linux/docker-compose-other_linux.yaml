@@ -1,0 +1,28 @@
+# "Files" don't work for
+# - sl
+# - sourcemage
+# for others work ok
+
+version: "2"
+services:
+   service_sourcemage:
+    image: sourcemage
+    entrypoint:  ["tail", "-f", "/dev/null"]
+   service_sl:
+     image: sl
+     entrypoint:  ["tail", "-f", "/dev/null"]
+   service_alt:
+     image: alt
+     entrypoint:  ["tail", "-f", "/dev/null"]
+   service_clearlinux:
+     image: clearlinux
+     entrypoint:  ["tail", "-f", "/dev/null"]
+   service_crux:
+     image: crux
+     entrypoint:  ["tail", "-f", "/dev/null"]
+   service_opensuse:
+     image: opensuse
+     entrypoint:  ["tail", "-f", "/dev/null"]
+#   service_:
+#     image:
+#     entrypoint:  ["tail", "-f", "/dev/null"]

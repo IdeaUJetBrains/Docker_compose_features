@@ -1,0 +1,28 @@
+# "Files" doesn't work for all of them
+
+version: "2"
+services:
+  centos_6.6:
+    image: centos:6.6
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  centos_6.7:
+    image: centos:6.7
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  centos_6.8:
+    image: centos:6.8
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  centos_6.9:
+    image: centos:6.9
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  centos_6.10:
+    image: centos:6.10
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  centos_6:
+    image: centos:6
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  centos_7:
+    image: centos:7
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  centos_latest:
+    image: centos
+    entrypoint:  ["tail", "-f", "/dev/null"]

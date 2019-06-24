@@ -1,0 +1,16 @@
+# "Files" don't work for
+# - ifnazar/sybase_15_7
+# - memsql/quickstart:minimal-6.0.14   Debian GNU/Linux, #VERSION="8 (jessie)"  8.9, already present in base images
+
+# for others work ok
+
+version: "2"
+services:
+  service_ifnazar_sybase_15_7:
+    image: ifnazar/sybase_15_7
+#   service_:
+#     image:
+#     entrypoint:  ["tail", "-f", "/dev/null"]
+#   service_:
+#     image:
+#     entrypoint:  ["tail", "-f", "/dev/null"]

@@ -1,0 +1,70 @@
+# "Files" don't work for
+#  - debian:jessie
+#  - debian:jessie-slim
+#  - debian:oldstable
+#  - debian:oldstable-slim
+#  for others works OK
+
+
+version: "2"
+services:
+  debian_buster:
+    image: debian:buster
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_buster-slim:
+    image: debian:buster-slim
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_experimental:
+    image: debian:experimental
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_jessie:
+    image: debian:jessie
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_jessie-slim:
+    image: debian:jessie-slim
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_oldstable:
+    image: debian:oldstable
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_oldstable-slim:
+    image: debian:oldstable-slim
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_rc-buggy:
+    image: debian:rc-buggy
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_sid:
+    image: debian:sid
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_sid-slim:
+    image: debian:sid-slim
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_stable:
+    image: debian:stable
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_stable-backports:
+    image: debian:stable-backports
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_stable-slim:
+    image: debian:stable-slim
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_stretch:
+    image: debian:stretch
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_stretch-backports:
+    image: debian:stretch-backports
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_stretch-slim:
+    image: debian:stretch-slim
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_testing:
+    image: debian:testing
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_testing-slim:
+    image: debian:testing-slim
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_unstable:
+    image: debian:unstable
+    entrypoint:  ["tail", "-f", "/dev/null"]
+  debian_unstable-slim:
+    image: debian:unstable-slim
+    entrypoint:  ["tail", "-f", "/dev/null"]
