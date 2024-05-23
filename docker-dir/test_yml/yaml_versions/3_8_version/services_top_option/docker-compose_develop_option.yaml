@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  # https://docs.docker.com/compose/compose-file/develop/
+  test13:
+    image: openjdk
+    develop:
+      watch:
+        - action: sync+restart
+          ignore:
+            - some_modules/
+          path: ./webapp/html
+          target:
+
+
+  #    example from spec:
+  frontend:
+    image: example/webapp
+    build: ./webapp
+    develop:
+      watch:
+        # sync static content
+        - path: ./webapp/index.html
+          action: sync
+          target: /app/
+          ignore:
+            - node_modules/
+  backend:
+    image: example/backend
+    build: ./backend
+    develop:
+      watch:
+        # rebuild image and recreate service
+        - path: ./backend/src
+          action: rebuild

@@ -1,0 +1,54 @@
+version: "3.8"
+services:
+  # https://docs.docker.com/compose/compose-file/deploy/
+  test12:
+    image: openjdk
+    deploy:
+      endpoint_mode: vip
+      labels:
+        com.example.description: "This label will appear on the web service"
+      mode: replicated
+      placement:
+        max_replicas_per_node: 2
+        preferences:
+          datacenter: us-east
+        #          - datacenter=us-east
+        constraints:
+          - disktype=ssd
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+          pids: 1
+        reservations:
+          cpus: '0.25'
+          memory: 20M
+          devices:
+            - capabilities:  ["nvidia-compute"]
+              driver: nvidia
+              device_ids: ["GPU-f123d1c9-26bb-df9b-1c23-4a731f61d8c7"]
+              count: 2
+              options:
+                virtualization: false
+
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      rollback_config:
+        delay: 0s
+        failure_action: continue
+        max_failure_ratio: 0
+        monitor: 0s
+        order: stop-first
+        parallelism: 0
+      update_config:
+        monitor: 0s
+        max_failure_ratio:  0
+        failure_action:  continue
+        delay: 0s
+        order: stop-first
+        parallelism: 0
+
