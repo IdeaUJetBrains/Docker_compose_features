@@ -1,0 +1,7 @@
+services:
+  db:
+    image: openjdk:11
+
+volumes:
+  test:
+    name: test

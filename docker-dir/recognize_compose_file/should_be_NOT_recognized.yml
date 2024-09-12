@@ -1,0 +1,4 @@
+services:
+  db:
+    image: openjdk:11
+
