@@ -1,0 +1,86 @@
+version: '3.9'
+
+#1. =======================
+x-custom:
+  foo:
+    - bar
+    - zot
+
+
+
+
+#2. =======================
+
+
+
+#3. =======================
+x-env: &env
+  environment:
+    - CONFIG_KEY
+    - EXAMPLE_KEY
+
+#4  =======================
+
+x-function: &function
+  labels:
+    function: "true"
+  depends_on:
+    - gateway
+  networks:
+    - functions
+  deploy:
+    placement:
+      constraints:
+        - 'node.platform.os == linux'
+
+#5 =====================
+x-environment: &default-environment
+  FOO: BAR
+  ZOT: QUIX
+x-keys: &keys
+  KEY: VALUE
+
+
+#===========================================================//
+services:
+# 1 ===========================================
+  test1:
+    image: example/webapp
+    x-foo: bar
+#  2  ==================================================================
+  test2:
+    deploy:
+      placement:
+        x-aws-role: "arn:aws:iam::XXXXXXXXXXXX:role/foo"
+        x-aws-region: "eu-west-3"
+        x-azure-region: "france-central"
+#   3     ==========================================
+  test3_1:
+    <<: *env
+    image: my-image:latest
+  test3_2:
+    <<: *env
+    image: another-image:latest
+#    4 ===============================================
+  # Node.js gives OS info about the node (Host)
+  case4_1:
+    <<: *function
+    image: functions/nodeinfo:latest
+    environment:
+      no_proxy: "gateway"
+      https_proxy: $https_proxy
+  # Uses `cat` to echo back response, fastest function to execute.
+  case4_2:
+    <<: *function
+    image: functions/alpine:health
+    environment:
+      fprocess: "cat"
+      no_proxy: "gateway"
+      https_proxy: $https_proxy
+#   5 ===============================================
+
+  case5:
+    image: example/webapp
+    environment:
+      << : [*default-environment, *keys]
+      YET_ANOTHER: VARIABLE

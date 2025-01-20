@@ -1,0 +1,56 @@
+version: '3.9'
+#test1 ==============
+x-two:
+  &lebels2
+  - "one"
+  - "two"
+  - "three"
+#test2 ==============
+x-three:
+  - &labels3 "labels"
+#test3 ==============
+x-services-volumes:
+  - &common-services-dir
+    ${MY_DIR}/sub_dir_1:/container_dir_1
+    ${MY_DIR}/sub_dir_2:/container_dir_2
+  - &common-services-dir1
+    ${MY_DIR}/sub_dir_1:/container_dir_1
+  - &common-services-dir2
+    ${MY_DIR}/sub_dir_2:/container_dir_2
+
+#test4 ==============
+x-environment: &default-environment
+  FOO: BAR
+  ZOT: QUIX
+x-keys: &keys
+  KEY: VALUE
+
+#===========================================================//
+#===========================================================//
+services:
+  test4:
+    image: openjdk:11
+    environment:
+      <<: [ *default-environment, *keys ]
+      YET_ANOTHER: VARIABLE
+  test1:
+    image: openjdk:11
+    labels: *lebels2
+
+  test2:
+    image: openjdk:11
+    labels:
+      - *labels3
+
+  test3:
+    image: openjdk:11
+    volumes:
+      - *common-services-dir
+      - *common-services-dir1
+      - *common-services-dir2
+      - ${JAVA_HOME}/test:/config
+      -
+
+
+
+

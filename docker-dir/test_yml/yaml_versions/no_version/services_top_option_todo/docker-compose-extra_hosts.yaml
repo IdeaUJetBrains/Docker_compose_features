@@ -1,0 +1,19 @@
+
+services:
+  test27:
+    image: openjdk:11
+    extra_hosts:
+      seed: 1.2.3.4
+      tree: 4.3.2.1
+      somehost: "162.242.195.82"
+      otherhost: "50.31.209.229"
+      myhostv6: "::1"
+  test26:
+    image: openjdk
+    extra_hosts:
+      - "somehost=162.242.195.82"
+      - "otherhost=50.31.209.229"
+      - "myhostv6=::1"
+      - "myhostv6=[::1]"
+      - "somehost:162.242.195.82"
+      - "myhostv6:::1"

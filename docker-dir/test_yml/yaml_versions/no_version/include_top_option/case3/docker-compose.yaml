@@ -1,0 +1,5 @@
+version: '3.8'
+# TODO issue https://youtrack.jetbrains.com/issue/IJPL-67737/Docker-compose-include-property-not-recognized
+include:
+  - ${INCLUDE_PATH:?FOO}/compose.yaml
+  - ${INCLUDE_PATH:?FOO}/compose.yaml

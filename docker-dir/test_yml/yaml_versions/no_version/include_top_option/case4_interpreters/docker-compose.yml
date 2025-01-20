@@ -1,0 +1,9 @@
+include:
+  - services/php/php82/docker-compose.yml
+networks:
+  net-default-test:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 11.0.0.0/24

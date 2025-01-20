@@ -1,0 +1,9 @@
+include: 'templates/.before-script-template.yml'
+
+rspec1:
+  script:
+    - bundle exec rspec
+
+rspec2:
+  script:
+    - bundle exec rspec

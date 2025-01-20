@@ -1,0 +1,35 @@
+#version: "3.8"
+services:
+  #============================================================//
+  #   "Configs" top level option and its options
+  #============================================================//
+  test1:
+    image: busybox
+
+  #============================================================//
+  # TODO https://docs.docker.com/compose/compose-file/08-configs/
+configs:
+  test_config1:
+    file: ./httpd.conf
+    external: false
+    driver: test
+
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.40.0.199,nolock,soft,rw"
+      device: ":/docker/example"
+    template_driver: test
+
+# todo    issue  https://youtrack.jetbrains.com/issue/IJPL-155812/DockerCompose.-Editor.-Support-configs.environment-key
+  test_config2:
+    environment: ${DEBUG}
+
+# todo issue https://youtrack.jetbrains.com/issue/IJPL-155813/DockerCompose.-Editor.-Support-configs.content-key
+  test_config3:
+    content: |
+      debug=${DEBUG}
+      spring.application.admin.enabled=${DEBUG}
+      spring.application.name=${COMPOSE_PROJECT_NAME}
+  test_config4:
+    name: "${HTTP_CONFIG_KEY}"
+    external: true

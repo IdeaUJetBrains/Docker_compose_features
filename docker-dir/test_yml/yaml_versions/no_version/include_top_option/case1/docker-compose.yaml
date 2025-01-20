@@ -1,0 +1,11 @@
+#version: '3.8'
+# TODO issue https://youtrack.jetbrains.com/issue/IJPL-67737/Docker-compose-include-property-not-recognized
+include:
+  - path:
+      - ./foo/foo-compose.yml
+      - ./bar/bar-compose.yml
+    env_file:
+      - ./foo/.env
+      - ./bar/.env
+      - ../_data/bar/.env
+    project_directory: .

@@ -1,0 +1,61 @@
+##################
+#### NETWORKS ####
+##################
+networks:
+  proxy:
+    external: true
+
+####################
+#### EXTENSIONS ####
+####################
+x-environment: &default-tz-puid-pgid
+  TZ: ${TZ}
+  PUID: ${PUID}
+  PGID: ${PGID}
+
+# Commmon .env-file
+x-env-file: &services-env-file
+  env_file:
+    - .env
+
+# Common services directories
+x-services-volumes:
+  - &common-services-dir
+    ${MY_DIR}/sub_dir_1:/container_dir_1
+    ${MY_DIR}/sub_dir_2:/container_dir_2
+
+# Common network, security_opt, restart, profile
+x-common-keys-services: &common-keys-services
+  networks:
+    - proxy
+  security_opt:
+    - no-new-privileges:true
+  restart: unless-stopped
+  profiles:
+    - service_profile
+  volumes:
+    - *common-services-dir
+
+##################
+#### SERVICES ####
+##################
+services:
+
+  ###### app_1 ######
+  app_1:
+    image: app_1:latest
+    container_name: app_1
+    hostname: app_1
+    # extensions (.env-file | network & security-opt)
+    <<: [ *services-env-file, *common-keys-services ]
+    environment:
+      <<: *default-tz-puid-pgid
+      UMASK_SET: 022 #optional
+    volumes:
+      - "*common-services-dir"
+      - ${DOCKER_DIR}/appdata/app_1:/config
+      - ${MY_DIR}/sub_dir_3:/container_dir_3
+      - ${MY_DIR}/sub_dir_4:/container_dir_4
+    ports:
+      - 8080:80
+    restart: unless-stopped

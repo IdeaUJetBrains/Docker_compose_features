@@ -1,0 +1,45 @@
+version: '3.9'
+
+#1. =======================
+volumes:
+  db-data: &default-volume
+    driver: default
+    name: "data"
+  metrics1: *default-volume
+  metrics2:
+    <<: *default-volume
+    name: "metrics2"
+
+
+#2. =======================
+services:
+  test1:
+    image: my-image:latest
+    environment: &env
+      - CONFIG_KEY
+      - EXAMPLE_KEY
+      - DEMO_VAR
+  test2:
+    image: another-image:latest
+    environment: *env
+
+#3. =======================
+  test3:
+    image: example/database
+    volumes:
+      - db-data
+      - metrics2
+
+#4  =======================
+  test4:
+    image: my-image:latest
+    environment: &env
+      FOO: BAR
+      ZOT: QUIX
+  test5:
+    image: another-image:latest
+    environment:
+      <<: *env
+      YET_ANOTHER: VARIABLE
+
+#===========================================================//

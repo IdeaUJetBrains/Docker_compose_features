@@ -1,0 +1,6 @@
+
+services:
+  test0_13:
+    build:
+      context: .
+      privileged: false

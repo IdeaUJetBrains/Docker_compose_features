@@ -1,0 +1,86 @@
+version: '3.9'
+
+#1. =======================
+x-one: &labels1
+  labels:
+    label1: "label1 value"
+    label2: "label2 value"
+
+
+#2. =======================
+x-two:
+  &lebels2
+  - "one"
+  - "two"
+  - "three"
+
+#3. =======================
+x-three:
+  - &labels3 "labels"
+
+#4  =======================
+x-four: &dev-build
+  build:
+    context: .
+x-five: &with-reports
+  labels:
+    label1: "label1 value"
+    label2: "label2 value"
+
+#5  =======================
+x-environment: &default-environment
+  FOO: BAR
+  ZOT: QUIX
+x-keys: &keys
+  KEY: VALUE
+#6 =========================
+#7 =========================
+x-services-volumes:
+  - &common-services-dir
+    ${MY_DIR}/sub_dir_1:/container_dir_1
+    ${MY_DIR}/sub_dir_2:/container_dir_2
+  - &common-services-dir1
+    ${MY_DIR}/sub_dir_1:/container_dir_1
+  - &common-services-dir2
+    ${MY_DIR}/sub_dir_2:/container_dir_2
+#===========================================================//
+services:
+  test1:
+    image: openjdk:11
+    <<: *labels1
+
+  test2:
+    image: openjdk:11
+    labels: *lebels2
+
+  test3:
+    image: openjdk:11
+    labels:
+      - *labels3
+
+  test4:
+    image: openjdk:11
+    <<: [*dev-build, *with-reports]
+
+  test5:
+    image: openjdk:11
+    environment:
+      <<: [ *default-environment, *keys ]
+      YET_ANOTHER: VARIABLE
+
+  test6:
+    image: openjdk:11
+    labels:
+      - &flag Apple
+      - Beachball
+      - Cartoon
+      - Duckface
+      - *flag
+
+  test7:
+    image: openjdk:11
+    volumes:
+      - *common-services-dir
+      - *common-services-dir1
+      - *common-services-dir2
+      - ${JAVA_HOME}/test:/config

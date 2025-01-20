@@ -1,0 +1,42 @@
+#version: "3.8"
+services:
+  #============================================================//
+  #   "Volumes" top level option and its options
+  #============================================================//
+  backend:
+    image: example/database
+    volumes:
+      - db-data:/etc/data
+
+  backup:
+     image: backup-service
+     volumes:
+      - db-data:/var/lib/backup/data
+
+
+
+ #============================================================//
+volumes:
+  vol-test1:
+    driver: foobar
+    name: ${DATABASE_VOLUME}
+    labels:
+      com.example.description: "Database volume"
+      com.example.department: "IT/Ops"
+      com.example.label-with-empty-value: ""
+    external: true
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.40.0.199,nolock,soft,rw"
+      device: ":/docker/example"
+
+  vol-test2:
+    external:
+      #    todo why it is depricated in the completion list?
+      name: test
+
+  db-data:
+    labels:
+      - "com.example.description=Database volume"
+      - "com.example.department=IT/Ops"
+      - "com.example.label-with-empty-value"

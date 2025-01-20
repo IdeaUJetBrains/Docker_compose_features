@@ -1,0 +1,39 @@
+##################
+#### NETWORKS ####
+##################
+networks:
+  proxy:
+    external: true
+
+####################
+#### EXTENSIONS ####
+####################
+x-environment: &default-tz-puid-pgid
+  TZ: ${TZ}
+  PUID: ${PUID}
+  PGID: ${PGID}
+
+# Commmon .env-file
+x-env-file: &services-env-file
+  env_file:
+    - .env
+
+# Common services directories
+
+
+# Common network, security_opt, restart, profile
+
+
+##################
+#### SERVICES ####
+##################
+services:
+
+  ###### app_1 ######
+  app_1:
+    image: app_1:latest
+    volumes:
+      - *common-services-dir1
+      - *common-services-dir2
+      - ${MY_DIR}/sub_dir_5:/container_dir_5
+      - ${MY_DIR}/sub_dir_6:/container_dir_6

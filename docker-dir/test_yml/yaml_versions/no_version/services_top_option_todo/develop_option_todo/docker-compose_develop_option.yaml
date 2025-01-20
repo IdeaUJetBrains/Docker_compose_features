@@ -1,0 +1,61 @@
+#version: "3.8"
+services:
+  # https://docs.docker.com/compose/compose-file/develop/
+  # issue: FIXED by Virtus Labs  https://youtrack.jetbrains.com/issue/IJPL-68719/Develop-key-shows-as-unexpected-in-docker-compose.yaml
+  test13:
+    image: openjdk
+    develop:
+      watch:
+        - action: sync+restart
+          ignore:
+            - some_modules/
+          path: ./webapp/html
+          target: /tmp
+
+  test_values:
+    image: openjdk:11
+    develop:
+      watch:
+        - action: sync
+          path: src/test.txt
+          ignore:
+            - test?.txt
+            - modules/*
+            - modules/*.py
+            - modules/*/*
+            - .*
+            - .log
+            #      TODO  BUG?      DOn't understand why it is not correct.... For .dockerignore it is OK
+            #            - *.log
+            #            - **/modules/*.py
+            #            - **/modules
+            #            - **/.git
+            #            - **/*_test.go
+            #  TODO BUG: going to a new line leads to the absent list "-"
+#     TODO     https://youtrack.jetbrains.com/issue/IJPL-163275/DockerCompose.-Key-values-develop.watch.ignore-wrong-going-to-a-new-line-by-using-values-with
+            - !my.log
+            - !README.md
+
+
+
+
+  #    example from spec:
+  frontend:
+    image: example/webapp
+    build: ./webapp
+    develop:
+      watch:
+        # sync static content
+        - path: ./webapp/index.html
+          action: sync
+          target: /app/
+          ignore:
+            - node_modules/
+  backend:
+    image: example/backend
+    build: ./backend
+    develop:
+      watch:
+        # rebuild image and recreate service
+        - path: ./backend/src
+          action: rebuild

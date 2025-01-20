@@ -1,0 +1,4 @@
+include:
+  - remote: 'https://gitlab.com/awesome-project/raw/main/.before-script-template.yml'
+  - local: 'templates/.after-script-template.yml'
+  - template: Auto-DevOps.gitlab-ci.yml

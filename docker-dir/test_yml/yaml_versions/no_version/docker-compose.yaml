@@ -1,0 +1,13 @@
+services:
+  test:
+    image: openjdk:11
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: 3
+        labels: "production_status,geo"
+        labels-regex: "^(production_status|geo)"
+        env: "os,customer"
+        env-regex: "^(os|customer)"
+        compress: false

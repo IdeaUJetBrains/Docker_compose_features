@@ -1,0 +1,16 @@
+services:
+  web:
+    build: .
+    command: "$$VAR_NOT_INTERPOLATED_BY_COMPOSE"
+
+    labels:
+      "$VAR_NOT_INTERPOLATED_BY_COMPOSE": "BAR"
+      "$VAR1": ${VARIABLE:-${FOO}}
+      "$VAR2": ${VARIABLE?$FOO}
+      "$VAR3": ${VARIABLE:-${FOO:-default}}
+      "$VAR4": ${VARIABLE:-default}
+      "$VAR5": ${VARIABLE:?err}
+  web1:
+    image: openjdk:11
+    labels:
+      - "$VAR_INTERPOLATED_BY_COMPOSE=BAR"

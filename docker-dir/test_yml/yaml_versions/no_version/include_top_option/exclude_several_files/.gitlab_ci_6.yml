@@ -1,0 +1,7 @@
+include:
+  - 'https://gitlab.com/awesome-project/raw/main/.before-script-template.yml'
+  - 'templates/.after-script-template.yml'
+  - template: Auto-DevOps.gitlab-ci.yml
+  - project: 'my-group/my-project'
+    ref: main
+    file: 'templates/.gitlab-ci-template.yml'

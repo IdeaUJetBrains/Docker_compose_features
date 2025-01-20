@@ -1,0 +1,4 @@
+include:
+  - path: bar/bar-compose.yml
+    project_directory: ..
+    env_file: bar/.env

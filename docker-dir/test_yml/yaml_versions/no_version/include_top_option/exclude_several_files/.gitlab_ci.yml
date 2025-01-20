@@ -1,0 +1,4 @@
+include:
+  - project: path/to/my/project
+    ref: master
+    file: '/path/to/my/file.yml'

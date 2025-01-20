@@ -1,0 +1,2 @@
+include:
+  - remote: 'https://gitlab.com/awesome-project/raw/main/.before-script-template.yml'

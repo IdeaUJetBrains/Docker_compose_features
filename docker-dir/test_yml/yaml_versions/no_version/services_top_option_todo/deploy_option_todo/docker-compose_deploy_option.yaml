@@ -1,0 +1,58 @@
+#version: "3.8"
+services:
+  # https://docs.docker.com/compose/compose-file/deploy/
+
+  #=============================================================
+  #  https://docs.docker.com/compose/compose-file/deploy/#preferences
+  #  issue: FIXED by Virtus Labs   https://youtrack.jetbrains.com/issue/IJPL-155755/DockerCompose.-Editor.-Support-deploy.placement.preferences-key-values
+  test12_1:
+    image: openjdk
+    deploy:
+      placement:
+        preferences:
+          - datacenter=us-east
+  test12_2:
+    image: openjdk
+    deploy:
+      placement:
+        preferences:
+          datacenter: us-east
+
+# TODO Remained: https://youtrack.jetbrains.com/issue/IJPL-163007/DockerCompose.-Editor.-Red-code-at-deploy.placement.preferences-key-values-like-spread-node.labels.zone
+        #from here  https://docs.docker.com/compose/compose-file/deploy/#preferences
+        # full example:  https://github.com/docker/docs/issues/5804
+  test12_2_1:
+    image: postgres
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+          - engine.labels.operatingsystem == ubuntu 14.04
+        preferences:
+          - spread: node.labels.zone
+  #=============================================================
+  #  https://docs.docker.com/compose/compose-file/deploy/#resources
+  #  issue: FIXED by Virtus Labs https://youtrack.jetbrains.com/issue/IJPL-155756/DockerCompose.-Editor.-Support-deploy.resources.pids-key
+  test12_3:
+    image: openjdk
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+          pids: 1
+  #=============================================================
+  #  TODO https://docs.docker.com/compose/compose-file/deploy/#capabilities
+  #  issue
+  test12_4:
+    image: openjdk
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [ "nvidia-compute" ]
+              driver: nvidia
+              count: 2
+              device_ids: ["GPU-f123d1c9-26bb-df9b-1c23-4a731f61d8c7"]
+              options:
+                virtualization: false

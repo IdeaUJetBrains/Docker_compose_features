@@ -1,0 +1,74 @@
+#version: "3.8"
+services:
+  #============================================================//
+  #   "Networks" top level option and its options
+  #============================================================//
+  frontend:
+    image: example/webapp
+    networks:
+      - front-tier
+      - back-tier
+  proxy:
+    build: ./proxy
+    networks:
+      - frontend
+  app:
+    build: ./app
+    networks:
+      - frontend
+      - backend
+  db:
+    image: postgres
+    networks:
+      - backend
+  #============================================================//
+
+networks:
+  net-test1:
+    driver: bridge
+    driver_opts:
+      foo: "bar"
+      baz: 1
+    attachable: true
+    enable_ipv6: true
+    external: true
+    ipam:
+      driver: ttt
+      options:
+        foo: bar
+        baz: "0"
+      config:
+        aux_addresses:
+          host1: 172.28.1.5
+          host2: 172.28.1.6
+          host3: 172.28.1.7
+        gateway: 172.28.5.254
+        ip_range: 172.28.5.0/24
+        subnet: 172.28.0.0/16
+    labels:
+      com.example.description: "Financial transaction network"
+      com.example.department: "Finance"
+      com.example.label-with-empty-value: ""
+    internal: true
+    name: test-name
+  net-test2:
+    labels:
+      - "com.example.description=Financial transaction network"
+      - "com.example.department=Finance"
+      - "com.example.label-with-empty-value"
+  #      from examples
+  front-tier:
+  back-tier:
+  frontend:
+    # Use a custom driver
+    driver: custom-driver-1
+  backend:
+    # Use a custom driver which takes special options
+    driver: custom-driver-2
+    driver_opts:
+      foo: "1"
+      bar: "2"
+
+
+
+

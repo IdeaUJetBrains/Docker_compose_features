@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  anthill: &service
+    image: ociotec/anthill:1.0.0
+    ports:
+      - '80'
+    networks:
+      - proxy_net
+    deploy: &deploy
+      placement:
+        constraints:
+          - node.labels.arch == x86
+      labels: &labels
+        traefik.enable: 'true'
+        traefik.port: '80'
+        traefik.docker.network: 'proxy_net'
+        traefik.frontend.rule: 'Host: anthill.eht.ociotec.com'
+  conway:
+    <<: *service
+    image: ociotec/conway:1.0.0
+    deploy:
+      <<: *deploy
+      labels:
+        <<: *labels
+        traefik.frontend.rule: 'Host: conway.eht.ociotec.com'
+networks:
+  proxy_net:
+    external: true

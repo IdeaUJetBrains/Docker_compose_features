@@ -1,0 +1,24 @@
+services:
+  test:
+    image: openjdk:11
+    develop:
+      watch:
+        - action: sync
+          path: Dockerfile
+          target: /tmp
+          ignore:
+            - test?.txt
+            - modules/*
+            - modules/*.py
+            - modules/*/*
+            - .*
+            - .log
+#            TODO DOn't understand why it is not correct.... For .dockerignore it is OK
+#            - *.log
+#            - **/modules/*.py
+#            - **/modules
+#            - **/.git
+#            - **/*_test.go
+            #            going to a new line leads to the absent list "-"
+            - !important.log
+            - !README.md

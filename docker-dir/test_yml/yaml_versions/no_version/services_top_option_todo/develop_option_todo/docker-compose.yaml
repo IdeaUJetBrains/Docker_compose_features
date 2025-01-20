@@ -1,0 +1,37 @@
+# https://docs.docker.com/compose/compose-file/develop/
+# todo issue https://youtrack.jetbrains.com/issue/IJPL-68719/Develop-key-shows-as-unexpected-in-docker-compose.yaml
+services:
+  frontend:
+    image: example/webapp
+    build: ./webapp
+    develop:
+      watch:
+        # sync static content
+        - path: ./webapp/html
+          action: sync
+          target: /var/www
+          ignore:
+            - node_modules/
+
+
+
+  backend:
+    image: example/backend
+    build: ./backend
+    develop:
+      watch:
+        # rebuild image and recreate service
+        - path: ./backend/src
+          action: rebuild
+  web:
+    build: .
+    command: npm start
+    develop:
+      watch:
+        - action: sync
+          path: ./web
+          target: /src/web
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: package.json

@@ -1,0 +1,1 @@
+https://youtrack.jetbrains.com/issue/IJPL-149696/Docker-Compose.-The-resulting-compose-file-is-incorrect-when-include-property-pointing-to-another-compose-file-is-used

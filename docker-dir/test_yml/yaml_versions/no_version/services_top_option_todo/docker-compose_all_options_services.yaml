@@ -1,0 +1,955 @@
+#version: "3.9"
+services:
+
+
+  #============================================================//
+#   "Services" top level option and its options
+  #============================================================//
+  # TODO  https://docs.docker.com/compose/compose-file/deploy/  see in the separate file
+  # TODO  https://docs.docker.com/compose/compose-file/develop/ see in the separate file
+
+
+  #============================================================//
+  #  https://docs.docker.com/compose/compose-file/build/
+  #============================================================//
+
+  test0:
+    build:
+      labels:
+        com.example.description: "This label will appear on the web service"
+      target: /etc
+      context: backend
+      dockerfile: ../backend.Dockerfile
+  #========================
+  # https://docs.docker.com/compose/compose-file/build/#dockerfile_inline
+  #  issue: FIXED by Virtus Labs  https://youtrack.jetbrains.com/issue/IJPL-68725/Dockerfileinline-and-tags-attributes-are-not-recognized-in-Docker-Compose-file
+#  see Full test cases under folder  dockerfile_inline_in_yaml
+  test0_1:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM baseimage
+        RUN some command
+    #========================
+
+  test0_2:
+    build:
+      context: .
+      args:
+        GIT_COMMIT: cdc3b19
+  #========================
+  test0_3:
+    build:
+      context: .
+      args:
+        - GIT_COMMIT=cdc3b19
+  #========================
+  test0_4:
+    build:
+      context: .
+      ssh:
+        - default
+        - myproject=~/.ssh/myproject.pem
+  test0_6:
+    build:
+      context: .
+      ssh: ["default"]
+
+  #========================
+#  TODO https://docs.docker.com/compose/compose-file/build/#cache_from
+#  issue  https://youtrack.jetbrains.com/issue/IJPL-74647/DockerCompose.-Editor-build.cashfrom-inspection-errors-for-typelocalsrcpath-to-cache-and-typegha-as-a-source-for-cash-resolution
+  test0_7:
+    build:
+      context: .
+      cache_from:
+        - alpine:latest
+        - type=local,src=path/to/cache
+        - type=gha
+
+  #========================
+#  TODO https://docs.docker.com/compose/compose-file/build/#cache_to
+#  issue: FIXED by Virtus Labs   https://youtrack.jetbrains.com/issue/IJPL-74646/DockerCompose.-Editor.-Support-cacheto-key-under-build-key
+#  remained  https://youtrack.jetbrains.com/issue/IJPL-74647/DockerCompose.-Editor-build.cashfrom-inspection-errors-for-typelocalsrcpath-to-cache-and-typegha-as-a-source-for-cash-resolution
+
+  test0_8:
+    build:
+      context: .
+      cache_to:
+        - user/app:cache
+        - type=local,dest=path/to/cache
+
+  #========================
+#  TODO created https://youtrack.jetbrains.com/issue/IJPL-163271/Docker.Compose.-Provide-completion-navigation-for-additionalcontexts-values
+# https://docs.docker.com/compose/compose-file/build/#additional_contexts
+#  issue: FIXED by Virtus Labs  https://youtrack.jetbrains.com/issue/IJPL-155759/DockerCompose.-Editor.-Support-build.additionalcontexts-key
+  test0_9:
+    build:
+      context: .
+      additional_contexts:
+        - resources=/path/to/resources
+        - app=docker-image://my-app:latest
+        - source=https://github.com/myuser/project.git
+  test0_10:
+    build:
+      context: .
+      additional_contexts:
+        resources: /path/to/resources
+        app: docker-image://my-app:latest
+        source: https://github.com/myuser/project.git
+
+  #========================
+# TODO https://docs.docker.com/compose/compose-file/build/#extra_hosts  Use the same syntax as extra_hosts.
+# issue https://youtrack.jetbrains.com/issue/IJPL-155773/DockerCompose.-Editor.-Support-long-syntax-for-extrahosts-service-key
+  test0_11:
+    build:
+      context: .
+      extra_hosts:
+        - "somehost=162.242.195.82"
+        - "otherhost=50.31.209.229"
+        - "myhostv6=::1"
+  test0_11_1:
+    build:
+      context: .
+      extra_hosts:
+        somehost: "162.242.195.82"
+        otherhost: "50.31.209.229"
+        myhostv6: "::1"
+
+  #========================
+  test0_12:
+    build:
+      context: .
+      isolation: default
+
+  #========================
+  #https://docs.docker.com/compose/compose-file/build/#privileged
+  #  issue: FIXED by Virtus Labs https://youtrack.jetbrains.com/issue/IJPL-155761/DockerCompose.-Editor.-Support-build.privileged-key
+  test0_13:
+    build:
+      context: .
+      privileged: true
+
+  #========================
+  test0_14:
+    build:
+      context: .
+      labels:
+        com.example.description: "Accounting webapp"
+        com.example.department: "Finance"
+        com.example.label-with-empty-value: ""
+  test0_15:
+    build:
+      context: .
+      labels:
+        - "com.example.description=Accounting webapp"
+        - "com.example.department=Finance"
+        - "com.example.label-with-empty-value"
+
+  #========================
+#  TODO https://docs.docker.com/compose/compose-file/build/#no_cache
+#  issue https://youtrack.jetbrains.com/issue/IJPL-74643/DockerCompose.-Editor.-Support-nocache-key-under-build-key
+  test0_16:
+    build:
+      context: .
+      no_cache: true
+
+  #========================
+  test0_17:
+    build:
+      context: .
+      pull: true
+
+  #========================
+  test0_18:
+    build:
+      context: .
+      network: host
+
+  #========================
+  test0_19:
+    build:
+      context: .
+      network: host
+  #========================
+  test0_20:
+    build:
+      context: .
+      shm_size: '2gb'
+
+  #========================
+  test0_21:
+    build:
+      context: .
+      target: prod
+
+  #========================
+#  FIXED By AZ:   https://youtrack.jetbrains.com/issue/IJPL-68729/Docker-Compose-secrets-property-for-compose-build-is-not-recognized-correctly
+#  If we select version "3.8" or "3.9" - secrets are not recognized. Users often use "3.9".
+  test0_22:
+    build:
+      context: .
+      secrets:
+        - server-certificate
+  test0_23:
+    build:
+      context: .
+      secrets:
+        - source: server-certificate
+          target: server.cert
+          uid: "103"
+          gid: "103"
+          mode: 0440
+
+  #========================
+  #  https://docs.docker.com/compose/compose-file/build/#tags
+  #  issue: FIXED by Virtus Labs  https://youtrack.jetbrains.com/issue/IJPL-74642/DockerCompose.-Editor.-Support-tags-key-under-build-key
+  test0_24:
+    image: busybox
+    build:
+      context: .
+      tags:
+        - "myimage:mytag"
+        - "registry/username/myrepos:my-other-tag"
+  #========================
+  #  https://docs.docker.com/compose/compose-file/build/#ulimits
+#  issue: FIXED by Virtus Labs  https://youtrack.jetbrains.com/issue/IJPL-155770/DockerCompose.-Editor.-Support-build.ulimits-key
+#  completion for ulimits, validation:
+#  - value can be a number
+#  - value can be an object with: soft, hard   -   check completion
+  test0_25:
+    build:
+      context: .
+      ulimits:
+        nproc: 65535
+        nofile:
+          soft: 20000
+          hard: 40000
+  #========================
+  #  https://docs.docker.com/compose/compose-file/build/#platforms
+  # issue: FIXED by Virtus Labs  https://youtrack.jetbrains.com/issue/IJPL-74640/DockerCompose.-Editor.-Support-platforms-key-under-build-key
+  test0_26:
+    build:
+      context: .
+      platforms:
+        - "linux/amd64"
+        - "linux/arm64"
+        - "unsupported/unsupported"
+
+
+
+
+  #============================================================//
+  #============================================================//
+  test1:
+    image: busybox
+    blkio_config:
+      weight: 300
+      weight_device:
+        - path: /dev/sda
+          weight: 400
+      device_read_bps:
+        - path: /dev/sdb
+          rate: '12mb'
+      device_read_iops:
+        - path: /dev/sdb
+          rate: 120
+      device_write_bps:
+        - path: /dev/sdb
+          rate: '1024k'
+      device_write_iops:
+        - path: /dev/sdb
+          rate: 30
+
+  #============================================================//
+  test2:
+    image: openjdk
+    cpu_count: 2
+    cpu_percent: 30
+    cpu_shares: 2
+    cpu_period:  ""
+    cpu_quota: 3
+    cpu_rt_runtime: '400ms'
+    cpu_rt_period: '1400us'
+    cpus:  0.000
+    cpuset: 0-3
+
+  #============================================================//
+
+  test3:
+    image: openjdk
+    cap_add:
+      - ALL
+    cap_drop:
+      - NET_ADMIN
+      - SYS_ADMIN
+
+  #============================================================//
+  #  https://docs.docker.com/compose/compose-file/05-services/#cgroup
+  #  issue: FIXED by Virtus Labs  https://youtrack.jetbrains.com/issue/IJPL-155771/DockerCompose.-Editor.-Support-cgroup-service-key
+#  check :"cgroup" value completion: host or private
+  test4:
+    image: openjdk
+    cgroup: host
+    cgroup_parent: m-executor-abcd
+
+
+
+
+  #============================================================//
+
+  test5:
+    image: openjdk
+    command: bundle exec thin -p 3000
+#    command: [ "bundle", "exec", "thin", "-p", "3000" ]
+
+  #============================================================//
+
+  test6:
+    image: openjdk
+    configs:
+      - my_config
+      - my_other_config
+  test7:
+    image: openjdk
+    configs:
+      - source: my_config1
+        target: /redis_config
+        uid: "103"
+        gid: "103"
+        mode: 0440
+    container_name: test
+
+  #============================================================//
+
+  test8:
+    image: openjdk
+    credential_spec:
+      file: my-credential-spec.json
+  test9:
+    image: myimage:latest
+    credential_spec:
+      config: my_credential_spec
+
+  #============================================================//
+  # https://docs.docker.com/compose/compose-file/05-services/#long-syntax-1
+  # issue: FIXED by Virtus Labs  https://youtrack.jetbrains.com/issue/IJPL-68720/Docker-compose-dependson.required
+  test10:
+    image: openjdk:11
+    depends_on:
+      db:
+        condition: service_healthy
+        required: true
+      ttt:
+        restart: true
+        condition: service_started
+        required: false
+
+  # TODO https://docs.docker.com/compose/compose-file/05-services/#long-syntax-1
+  # issue https://youtrack.jetbrains.com/issue/IJPL-155746/DockerCompose.-Editor.-Support-dependson.restart-key
+  test10_1:
+    image: openjdk
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+  test11:
+    image: openjdk
+    depends_on:
+      - db
+      - redis
+  redis:
+    image: redis
+  db:
+    image: postgres
+
+  #============================================================//
+
+  test14:
+    image: openjdk
+    device_cgroup_rules:
+      - 'c 1:3 mr'
+      - 'a 7:* rmw'
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
+      - "/dev/sda:/dev/xvda:rwm"
+#    dns: 8.8.8.8
+    dns:
+      - 8.8.8.8
+      - 9.9.9.9
+    dns_opt:
+      - use-vc
+      - no-tld-query
+#    dns_search: example.com
+    dns_search:
+      - dc1.example.com
+      - dc2.example.com
+    domainname: myname
+
+  #============================================================//
+
+  test15:
+    image: openjdk
+    entrypoint: /code/entrypoint.sh
+  test16:
+    image: openjdk
+    entrypoint:
+      - php
+      - -d
+      - zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so
+      - -d
+      - memory_limit=-1
+      - vendor/bin/phpunit
+
+  #============================================================//
+  #  TODO  https://docs.docker.com/compose/compose-file/05-services/#env_file
+  #  issue https://youtrack.jetbrains.com/issue/IJPL-68738/Docker-Compose.-Editor.-Path-property-of-envfile-attribute-is-not-recognized
+  test17:
+    image: openjdk
+    env_file: .env
+  test18:
+    image: openjdk
+    env_file:
+      - ./a.env
+      - ./b.env
+  test19:
+    image: openjdk
+    env_file:
+      - path: ./default.env
+        required: true # default
+      - path: ./override.env
+        required: false
+  #============================================================//
+
+  test20:
+    image: openjdk
+    environment:
+      RACK_ENV: development
+      SHOW: "true"
+      USER_INPUT:
+  test21:
+    image: openjdk
+    environment:
+    - RACK_ENV=development
+    - SHOW=true
+    - USER_INPUT
+  #============================================================//
+
+  test22:
+    image: openjdk
+    expose:
+      - "3000"
+      - "8000"
+      - "8080-8085/tcp"
+  #============================================================//
+
+  test23:
+    image: openjdk
+    extends:
+      file: common.yml
+      service: db
+
+  #      =====
+  base:
+    image: busybox
+    user: root
+  common:
+    image: busybox
+    extends:
+     service: base
+  cli:
+    extends:
+      service: common
+#      =====
+  common1:
+    image: busybox
+    security_opt:
+      - label:role:ROLE
+  cli1:
+    extends:
+        service: common1
+    security_opt:
+      - label:user:USER
+  #============================================================//
+
+  test25:
+    image: openjdk
+    external_links:
+      - redis
+      - database:mysql
+      - database:postgresql
+  #============================================================//
+  #  https://docs.docker.com/compose/compose-file/05-services/#long-syntax-2
+  #  issue: FIXED by Virtus Labs  https://youtrack.jetbrains.com/issue/IJPL-155773/DockerCompose.-Editor.-Support-long-syntax-for-extrahosts-service-key
+  test26:
+    image: openjdk
+    extra_hosts:
+      - "somehost=162.242.195.82"
+      - "otherhost=50.31.209.229"
+      - "myhostv6=::1"
+      - "myhostv6=[::1]"
+      - "somehost:162.242.195.82"
+      - "myhostv6:::1"
+  test27:
+    image: openjdk
+    extra_hosts:
+      seed: 1.2.3.4
+      tree: 4.3.2.1
+      somehost: "162.242.195.82"
+      otherhost: "50.31.209.229"
+      myhostv6: "::1"
+
+  #============================================================//
+  # TODO https://docs.docker.com/compose/compose-file/05-services/#group_add
+  test28:
+    image: openjdk
+    group_add:
+      - mail
+
+
+  #============================================================//
+  # https://docs.docker.com/compose/compose-file/05-services/#healthcheck
+#   issue: FIXED by Virtus Labs  https://youtrack.jetbrains.com/issue/IJPL-155776/DockerCompose.-Editor.-Support-healthcheck.startinterval-key
+  test29:
+    image: openjdk
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost" ]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+      start_interval: 5s
+      disable: false
+
+  #============================================================//
+
+  test30:
+    image: openjdk
+    hostname: localhost
+    init: true
+#    ipc: "shareable"
+    ipc: "service:[service name]"
+
+  #============================================================//
+
+  test31:
+    image: openjdk
+    isolation: default
+
+  #============================================================//
+
+  test32:
+    image: openjdk
+    labels:
+      com.example.description: "Accounting webapp"
+      com.example.department: "Finance"
+      com.example.label-with-empty-value: ""
+  test33:
+    image: openjdk
+    labels:
+      - "com.example.description=Accounting webapp"
+      - "com.example.department=Finance"
+      - "com.example.label-with-empty-value"
+
+  #============================================================//
+
+  test34:
+    image: openjdk
+    links:
+      - db
+      - db:database
+      - redis
+
+  #============================================================//
+
+  test35:
+    image: openjdk:11
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://192.168.0.42:123"
+
+  test35_1:
+    image: openjdk:11
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: 3
+        labels: "production_status,geo"
+        labels-regex: "^(production_status|geo)"
+        env: "os,customer"
+        env-regex: "^(os|customer)"
+        compress: false
+
+
+        
+
+  #============================================================//
+
+  test36:
+    image: openjdk
+    mac_address: smth
+
+  #============================================================//
+  # TODO https://docs.docker.com/compose/compose-file/05-services/#mem_limit
+  test37:
+    image: openjdk
+    mem_limit: 1024kb
+    mem_reservation: 2048k
+    mem_swappiness: 100
+    memswap_limit: 0
+
+  #============================================================//
+
+  test38:
+    image: openjdk
+#    network_mode: "host"
+    network_mode: "none"
+#    network_mode: "service:[service name]"
+
+  #============================================================//
+  #  https://docs.docker.com/compose/compose-file/05-services/#mac_address-1
+  #  issue: FIXED by Virtus Labs   https://youtrack.jetbrains.com/issue/IJPL-155778/DockerCompose.-Editor.-Support-networks.macaddress-key
+  test39:
+    image: openjdk
+    networks:
+      - some-network
+      - other-network
+  test40:
+    image: openjdk
+    networks:
+      back-tier:
+          aliases:
+            - mysql
+          ipv4_address: 172.16.238.10
+          ipv6_address: 2001:3984:3989::10
+          priority: 1
+          link_local_ips:
+            - 57.123.22.11
+            - 57.123.22.13
+          mac_address: smth
+  nginx:
+    image: nginx:latest
+    networks:
+      default:
+        mac_address: de:ad:be:ef:00:02
+
+#example from spec
+  frontend1:
+    image: example/webapp
+    networks:
+      - front-tier
+      - back-tier
+
+  monitoring1:
+    image: example/monitoring
+    networks:
+      - admin
+
+  backend1:
+    image: example/backend
+    networks:
+      back-tier:
+        aliases:
+          - database
+      admin:
+        aliases:
+          - mysql
+
+
+  #============================================================//
+  #  TODO https://docs.docker.com/compose/compose-file/05-services/#pids_limit
+  test41:
+    image: openjdk
+    oom_kill_disable: false
+    oom_score_adj: smth
+    pid: 1
+    pids_limit: 10
+
+  #============================================================//
+
+  test42:
+    image: openjdk
+    platform: darwin
+#    platform: windows/amd64
+#    platform: linux/arm64/v8
+
+  #============================================================//
+
+  test43:
+    image: openjdk
+    ports:
+      - "3000"
+      - "3000-3005"
+      - "8000:8000"
+      - "9090-9091:8080-8081"
+      - "49100:22"
+      - "8000-9000:80"
+      - "127.0.0.1:8001:8001"
+      - "127.0.0.1:5000-5010:5000-5010"
+      - "6060:6060/udp"
+  #=======================
+  # TODO  https://docs.docker.com/compose/compose-file/05-services/#long-syntax-3
+  #  issue https://youtrack.jetbrains.com/issue/IJPL-155780/DockerCompose.-Editor.-Support-ports.name-key
+  test44_1:
+    image: openjdk
+    ports:
+      - name: web
+        target: 80
+        host_ip: 127.0.0.1
+        published: 8080
+        protocol: tcp
+        mode: host
+  #=======================
+  # TODO  https://docs.docker.com/compose/compose-file/05-services/#long-syntax-3
+  #  issue https://youtrack.jetbrains.com/issue/IJPL-155781/DockerCompose.-Editor.-Support-ports.appprotocol-key
+  test44_2:
+    image: openjdk
+    ports:
+      - target: 82
+        host_ip: 127.0.0.1
+        published: 8082
+        protocol: tcp
+        app_protocol: https
+        mode: host
+  #=======================
+  # TODO  https://docs.docker.com/compose/compose-file/05-services/#long-syntax-3
+  #  issue https://youtrack.jetbrains.com/issue/IJPL-155783/DockerCompose.-Editor.-Red-code-by-using-ports.published-key-values-in-quotes
+  test44_3:
+    image: openjdk
+    ports:
+      - target: 81
+        host_ip: 127.0.0.1
+        published: "8083-9000"
+        protocol: tcp
+        mode: host
+
+  #============================================================//
+
+  test45:
+    image: openjdk
+    privileged: false
+
+  #============================================================//
+
+  test46:
+    image: openjdk
+    profiles: ["frontend"]
+  test47:
+    image: openjdk
+    profiles:
+      - debug
+
+  #============================================================//
+# https://docs.docker.com/compose/compose-file/05-services/#restart
+# issue: FIXED by Virtus Labs  https://youtrack.jetbrains.com/issue/IJPL-68706/docker-compose.yml-Accept-restart-on-failuremax-retries-syntax
+  test48:
+    image: openjdk
+    pull_policy: build
+    read_only: false
+    restart: on-failure:5
+
+  test48_1:
+    image: openjdk
+    pull_policy: build
+    read_only: false
+    restart: always
+
+  #============================================================//
+  #  TODO https://docs.docker.com/compose/compose-file/05-services/#runtime
+  test49:
+    image: openjdk
+    command: true
+    runtime: runc
+
+
+  #============================================================//
+  #  TODO https://docs.docker.com/compose/compose-file/05-services/#scale
+  test50:
+    image: openjdk
+    scale: 2
+
+  #============================================================//
+
+  test51:
+    image: openjdk
+    secrets:
+      - server-certificate
+  test52:
+    image: openjdk
+    secrets:
+      - source: server-certificate
+        target: server.cert
+        uid: "103"
+        gid: "103"
+        mode: 0440
+
+  #============================================================//
+
+  test53:
+    image: openjdk
+    security_opt:
+      - label:user:USER
+      - label:role:ROLE
+    shm_size: 2048k
+
+  #============================================================//
+
+  test54:
+    image: openjdk
+    stdin_open: false
+    stop_grace_period: 1m30s
+    stop_signal: SIGUSR1
+
+  #============================================================//
+
+  test55:
+    image: openjdk
+    storage_opt:
+      size: '1G'
+
+  #============================================================//
+
+  test56:
+    image: openjdk
+    sysctls:
+      net.core.somaxconn: 1024
+      net.ipv4.tcp_syncookies: 0
+  test57:
+    image: openjdk
+    sysctls:
+      - net.core.somaxconn=1024
+      - net.ipv4.tcp_syncookies=0
+
+  #============================================================//
+
+  test58:
+    image: openjdk
+    tmpfs:
+      - /run
+      - /tmp
+  test59:
+    image: openjdk
+    tmpfs: /run
+
+  #============================================================//
+  test60:
+    image: openjdk
+    tty: false
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
+
+  #============================================================//
+
+  test61:
+    image: openjdk
+    user: root
+    userns_mode: "host"
+
+  #============================================================//
+  # TODO https://docs.docker.com/compose/compose-file/05-services/#uts
+  #  issue https://youtrack.jetbrains.com/issue/IJPL-155784/DockerCompose.-Editor.-Support-uts-service-key
+  test62:
+    image: openjdk
+    uts: "host"
+
+  #============================================================//
+  # TODO https://docs.docker.com/compose/compose-file/05-services/#long-syntax-5
+  #  issue https://youtrack.jetbrains.com/issue/IJPL-155785/DockerCompose.-Editor.-Support-volumes.volume.subpath-service-key
+  test63:
+    image: openjdk
+    volumes:
+      - type: volume
+        source: db-data
+        target: /data
+        volume:
+          nocopy: true
+          subpath: sub
+
+  #=================
+  # TODO https://docs.docker.com/compose/compose-file/05-services/#long-syntax-5
+  #  issue https://youtrack.jetbrains.com/issue/IJPL-155786/DockerCompose.-Editor.-Support-keys-for-volumes.bind-createhostpath-and-selinux
+  test63_1:
+    image: openjdk:11
+    volumes:
+      - type: bind
+        target: /tmp/data
+        source: ./logs
+        bind:
+          propagation: private
+          create_host_path: /tmp1
+          selinux: Z
+
+
+  #===============
+  # TODO https://docs.docker.com/compose/compose-file/05-services/#long-syntax-5
+  #  issue https://youtrack.jetbrains.com/issue/IJPL-155788/DockerCompose.-Editor.-Support-volumes.tmpfs.mode-key
+  test63_2:
+    image: openjdk:11
+    volumes:
+      - type: tmpfs
+        target: /tmp
+        tmpfs:
+#          TODO create issue
+          size: 128k
+          mode: 0777
+      - type: tmpfs
+        target: /var/lib/postgresql/data
+        #        # 512 MB
+        tmpfs:
+          size: 536870912
+
+
+  test63_3:
+    image: openjdk:11
+    volumes:
+      - type: npipe
+        target: /data1
+        consistency: cached
+
+
+  #============================================================//
+
+  test64:
+    image: openjdk
+    volumes_from:
+      - service_name
+      - service_name:ro
+      - container:container_name
+      - container:container_name:rw
+
+  #============================================================//
+
+  test65:
+    image: openjdk
+    working_dir: .
+
+
+
+
+  #============================================================//
+  #============================================================//
+  #============================================================//
+
+configs:
+  my_config:
+    file: ./my_config.txt
+  my_other_config:
+    external: true
+  my_config1:
+    external: true
+  my_credentials_spec:
+    file: ./my-credential-spec.json|
+
+networks:
+  front-tier:
+  back-tier:
+  admin:
+
+
+secrets:
+  server-certificate:
+    file: ./server.cert
